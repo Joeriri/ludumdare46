@@ -16,6 +16,7 @@ public class Arm : MonoBehaviour
     private FixedJoint2D fixedJoint;
 
     private GameObject attachmentPoint;
+    private SpringJoint2D attachmentPointJoint;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +50,8 @@ public class Arm : MonoBehaviour
         if (attachable)
         {
             attachmentPoint = attachmentObject;
+            attachmentPointJoint = attachmentPoint.GetComponent<SpringJoint2D>();
+
             transform.position = attachmentPoint.transform.position;
             fixedJoint.enabled = true;
             fixedJoint.connectedBody = body.GetComponent<Rigidbody2D>();
@@ -67,6 +70,8 @@ public class Arm : MonoBehaviour
     public void DetachArm()
     {
         attachmentPoint = null;
+        attachmentPointJoint = null;
+
         fixedJoint.enabled = false;
         // Put arm back on default layer
         Transform[] _children = GetComponentsInChildren<Transform>();
@@ -83,16 +88,23 @@ public class Arm : MonoBehaviour
 
     void SelectArm()
     {
+        // find some components
         Rigidbody2D targetRb = target.GetComponent<Rigidbody2D>();
-        targetRb.bodyType = RigidbodyType2D.Dynamic;
+        SpringJoint2D targetJoint = target.GetComponent<SpringJoint2D>();
+        // make arm independent from body
+        attachmentPointJoint.enabled = false;
+        attachmentPointJoint.connectedBody = null;
+        // make joint from target to arm
+        targetRb.bodyType = RigidbodyType2D.Kinematic;
+        targetRb.velocity = Vector2.zero;
+        targetJoint.enabled = true;
 
-        attachmentPoint.GetComponent<SpringJoint2D>();
+        Debug.Log("Arm deselected");
     }
 
     void DeselectArm()
     {
         // find some components
-        SpringJoint2D attachmentPointJoint = attachmentPoint.GetComponent<SpringJoint2D>();
         Rigidbody2D targetRb = target.GetComponent<Rigidbody2D>();
         SpringJoint2D targetJoint = target.GetComponent<SpringJoint2D>();
         // make joint from attachmentpoint to target
