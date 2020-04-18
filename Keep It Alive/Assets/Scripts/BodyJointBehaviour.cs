@@ -27,7 +27,15 @@ public class BodyJointBehaviour : MonoBehaviour
         if(collision.gameObject.tag == "Limb")
         {
             Arm arm = collision.gameObject.GetComponent<Arm>();
-            arm.AttachArm(this);
+            if(arm == null) 
+            { 
+                Leg leg = collision.gameObject.GetComponent<Leg>();
+                Foot foot = leg.foot;
+                //leg.AttachLeg(this);
+                foot.AttachLeg(this);
+            }
+            else { arm.AttachArm(this); }
+
             
             //Rigidbody2D rb = GetComponent<Rigidbody2D>();
             //if (rb == null) { rb = this.gameObject.AddComponent<Rigidbody2D>(); }
