@@ -24,11 +24,9 @@ public class BodyJointBehaviour : MonoBehaviour
     {
         if(collision.gameObject.tag == "Limb")
         {
-            Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
-            if (rb != null) { Destroy(rb); }
-            collision.gameObject.GetComponent<Transform>().SetParent(this.gameObject.GetComponent<Transform>());
-            collision.gameObject.GetComponent<Transform>().localPosition = Vector3.zero;
-
+            Arm arm = collision.gameObject.GetComponent<Arm>();
+            arm.AttachArm(gameObject);
+            
             //Rigidbody2D rb = GetComponent<Rigidbody2D>();
             //if (rb == null) { rb = this.gameObject.AddComponent<Rigidbody2D>(); }
             //rb.isKinematic = true;

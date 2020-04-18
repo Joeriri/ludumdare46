@@ -25,7 +25,7 @@ public class IK : MonoBehaviour
     void Update()
     {
         UpdateIK();
-    }   
+    }
 
     void UpdateIK()
     {
@@ -54,7 +54,7 @@ public class IK : MonoBehaviour
             jointAngleB = 180f - angle1;
         }
 
-        jointA.transform.localRotation = Quaternion.Euler(0, 0, jointAngleA);
+        jointA.transform.rotation = Quaternion.Euler(0, 0, jointAngleA);
         jointB.transform.localRotation = Quaternion.Euler(0, 0, jointAngleB);
         
     }
