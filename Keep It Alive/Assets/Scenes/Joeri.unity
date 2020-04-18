@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -269,11 +269,20 @@ PrefabInstance:
       propertyPath: m_AutoConfigureConnectedAnchor
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 741989422, guid: fa493586b7a0f834c9d4148edf44dbf6, type: 3}
+      propertyPath: m_BreakForce
+      value: Infinity
+      objectReference: {fileID: 0}
     - target: {fileID: 995447654246198874, guid: fa493586b7a0f834c9d4148edf44dbf6,
         type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1035441872}
+    - target: {fileID: 995447654246198874, guid: fa493586b7a0f834c9d4148edf44dbf6,
+        type: 3}
+      propertyPath: limbBreakForce
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4725467096060906675, guid: fa493586b7a0f834c9d4148edf44dbf6,
         type: 3}
       propertyPath: m_Layer
@@ -402,21 +411,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 232575204675434458, guid: b6e8ddb4d471ad94291527ec046338c4,
-        type: 3}
-      propertyPath: m_Distance
-      value: 3.6348522
-      objectReference: {fileID: 0}
-    - target: {fileID: 2513731618933940952, guid: b6e8ddb4d471ad94291527ec046338c4,
-        type: 3}
-      propertyPath: m_Distance
-      value: 3.7128334
-      objectReference: {fileID: 0}
-    - target: {fileID: 4057025161734031747, guid: b6e8ddb4d471ad94291527ec046338c4,
-        type: 3}
-      propertyPath: m_Distance
-      value: 4.758868
-      objectReference: {fileID: 0}
     - target: {fileID: 8091809603309431204, guid: b6e8ddb4d471ad94291527ec046338c4,
         type: 3}
       propertyPath: m_Name
@@ -774,11 +768,20 @@ PrefabInstance:
       propertyPath: m_AutoConfigureConnectedAnchor
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 741989422, guid: fa493586b7a0f834c9d4148edf44dbf6, type: 3}
+      propertyPath: m_BreakForce
+      value: Infinity
+      objectReference: {fileID: 0}
     - target: {fileID: 995447654246198874, guid: fa493586b7a0f834c9d4148edf44dbf6,
         type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1009077748727936646}
+    - target: {fileID: 995447654246198874, guid: fa493586b7a0f834c9d4148edf44dbf6,
+        type: 3}
+      propertyPath: limbBreakForce
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4725467096060906675, guid: fa493586b7a0f834c9d4148edf44dbf6,
         type: 3}
       propertyPath: m_Layer
