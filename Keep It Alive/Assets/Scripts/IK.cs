@@ -57,13 +57,13 @@ public class IK : MonoBehaviour
         else
         {
             float cosAngle0 = ((lengthTar * lengthTar) + (lengthA * lengthA) - (lengthB * lengthB)) / (2 * lengthTar * lengthA);
-            float angle0 = Mathf.Asin(cosAngle0) * Mathf.Rad2Deg;
+            float angle0 = Mathf.Acos(cosAngle0) * Mathf.Rad2Deg;
 
             float cosAngle1 = ((lengthB * lengthB) + (lengthA * lengthA) - (lengthTar * lengthTar)) / (2 * lengthB * lengthA);
-            float angle1 = Mathf.Asin(cosAngle1) * Mathf.Rad2Deg;
+            float angle1 = Mathf.Acos(cosAngle1) * Mathf.Rad2Deg;
 
-            jointAngleA = atan - angle0;
-            jointAngleB = 180f - angle1;
+            jointAngleA = atan + angle0;
+            jointAngleB = 180f + angle1;
         }
 
         jointA.transform.rotation = Quaternion.Euler(0, 0, jointAngleA);

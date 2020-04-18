@@ -330,6 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachRadius: 4
+  isAttachable: 1
 --- !u!1 &863994268
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,6 +520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachRadius: 4
+  isAttachable: 1
 --- !u!1 &1170292497
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,6 +946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachRadius: 4
+  isAttachable: 1
 --- !u!1001 &1575318956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1348,6 +1351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachRadius: 4
+  isAttachable: 1
 --- !u!1 &1976363705
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,6 +1448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachRadius: 4
+  isAttachable: 1
 --- !u!50 &2070198529 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 5734434263231798857, guid: fa493586b7a0f834c9d4148edf44dbf6,
@@ -1582,7 +1587,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  handSelector: {fileID: 0}
+  selectorRadius: 1
   detachCooldownDuration: 1
+  limbBreakForce: Infinity
 --- !u!58 &4454229059037669781
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1670,6 +1678,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.x
       value: -0.21800017
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100029826429118725, guid: 3045cb3991d4f9d45acd48b054948eb1,
+        type: 3}
+      propertyPath: m_Frequency
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7838439450778450614, guid: 3045cb3991d4f9d45acd48b054948eb1,
         type: 3}
