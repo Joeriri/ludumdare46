@@ -11,6 +11,7 @@ public class IK : MonoBehaviour
     [SerializeField] private Transform hand;
     [SerializeField] private Transform target;
     [SerializeField] private bool flipAngle;
+    [SerializeField] private bool autoConfigure = false;
 
     private float lengthA;
     private float lengthB;
@@ -69,7 +70,19 @@ public class IK : MonoBehaviour
         jointA.transform.rotation = Quaternion.Euler(0, 0, jointAngleA);
         jointB.transform.localRotation = Quaternion.Euler(0, 0, jointAngleB);
 
-        
+        if (autoConfigure)
+        {
+            Vector2 dir = new Vector2(target.position.x - jointA.position.x, target.position.y - jointA.position.y);
+            float dot = Vector2.Dot(dir.normalized, Vector2.right);
+            if(dot > 0)
+            {
+                flipAngle = true;
+            }
+            else
+            {
+                flipAngle = false;
+            }
+        }
     }
 
     private void OnDrawGizmos()
