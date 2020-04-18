@@ -269,11 +269,20 @@ PrefabInstance:
       propertyPath: m_AutoConfigureConnectedAnchor
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 741989422, guid: fa493586b7a0f834c9d4148edf44dbf6, type: 3}
+      propertyPath: m_BreakForce
+      value: Infinity
+      objectReference: {fileID: 0}
     - target: {fileID: 995447654246198874, guid: fa493586b7a0f834c9d4148edf44dbf6,
         type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1035441872}
+    - target: {fileID: 995447654246198874, guid: fa493586b7a0f834c9d4148edf44dbf6,
+        type: 3}
+      propertyPath: limbBreakForce
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4725467096060906675, guid: fa493586b7a0f834c9d4148edf44dbf6,
         type: 3}
       propertyPath: m_Layer
@@ -774,11 +783,20 @@ PrefabInstance:
       propertyPath: m_AutoConfigureConnectedAnchor
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 741989422, guid: fa493586b7a0f834c9d4148edf44dbf6, type: 3}
+      propertyPath: m_BreakForce
+      value: Infinity
+      objectReference: {fileID: 0}
     - target: {fileID: 995447654246198874, guid: fa493586b7a0f834c9d4148edf44dbf6,
         type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1009077748727936646}
+    - target: {fileID: 995447654246198874, guid: fa493586b7a0f834c9d4148edf44dbf6,
+        type: 3}
+      propertyPath: limbBreakForce
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4725467096060906675, guid: fa493586b7a0f834c9d4148edf44dbf6,
         type: 3}
       propertyPath: m_Layer

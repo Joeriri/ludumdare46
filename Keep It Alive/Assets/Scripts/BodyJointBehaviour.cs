@@ -6,6 +6,8 @@ public class BodyJointBehaviour : MonoBehaviour
 {
     [SerializeField] float attachRadius = 4;
 
+    [HideInInspector] public bool isAttachable = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,7 @@ public class BodyJointBehaviour : MonoBehaviour
         if(collision.gameObject.tag == "Limb")
         {
             Arm arm = collision.gameObject.GetComponent<Arm>();
-            arm.AttachArm(gameObject);
+            arm.AttachArm(this);
             
             //Rigidbody2D rb = GetComponent<Rigidbody2D>();
             //if (rb == null) { rb = this.gameObject.AddComponent<Rigidbody2D>(); }

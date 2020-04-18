@@ -6,24 +6,35 @@ public class Arm : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private Transform target;
+    private SpringJoint2D targetJoint;
+    private bool selected = false;
+    [SerializeField] private Transform handSelector;
+    [SerializeField] private float selectorRadius = 1f;
 
     [Header("Attachment")]
     [SerializeField] private float detachCooldownDuration = 1f;
     private bool attachable = true;
-
+    private bool attached = false;
+    [SerializeField] float limbBreakForce = Mathf.Infinity;
 
     private MainBody body;
     private FixedJoint2D fixedJoint;
+    private Rigidbody2D rb;
 
-    private GameObject attachmentPoint;
+    private BodyJointBehaviour attachmentPoint;
     private SpringJoint2D attachmentPointJoint;
 
     // Start is called before the first frame update
     void Start()
     {
         fixedJoint = GetComponent<FixedJoint2D>();
-
+        rb = GetComponent<Rigidbody2D>();
+        //handSelector = transform.Find("HandSelector");
         body = FindObjectOfType<MainBody>();
+        targetJoint = target.GetComponent<SpringJoint2D>();
+
+        DetachArm();
+        //DeselectArm();
     }
 
     // Update is called once per frame
@@ -43,19 +54,53 @@ public class Arm : MonoBehaviour
         {
             DetachArm();
         }
+
+        if (selected)
+        {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            target.position = mousePos;
+
+            // arm break
+            if (fixedJoint.reactionForce.magnitude > limbBreakForce)
+            {
+                DetachArm();
+                Debug.Log("Arm broke off!");
+            }
+
+
+            // Deselect the arm
+            if (Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                DeselectArm();
+            }
+        }
+        else
+        {
+            // Select the arm
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                if (Vector2.Distance(mousePos, handSelector.position) < selectorRadius)
+                {
+                    SelectArm();
+                }
+            }
+        }
     }
 
-    public void AttachArm(GameObject attachmentObject)
+    public void AttachArm(BodyJointBehaviour bodyPoint)
     {
-        if (attachable)
+        if (attachable && !attached)
         {
-            attachmentPoint = attachmentObject;
+            attached = true;
+            attachable = false;
+
+            attachmentPoint = bodyPoint;
             attachmentPointJoint = attachmentPoint.GetComponent<SpringJoint2D>();
 
             transform.position = attachmentPoint.transform.position;
             fixedJoint.enabled = true;
             fixedJoint.connectedBody = body.GetComponent<Rigidbody2D>();
-            attachable = false;
             // Move layers to avoid nasty collisions
             Transform[] _children = GetComponentsInChildren<Transform>();
             foreach (Transform child in _children)
@@ -69,9 +114,12 @@ public class Arm : MonoBehaviour
 
     public void DetachArm()
     {
+        attached = false;
+        attachable = false;
+
         attachmentPoint = null;
         attachmentPointJoint = null;
-
+        
         fixedJoint.enabled = false;
         // Put arm back on default layer
         Transform[] _children = GetComponentsInChildren<Transform>();
@@ -80,7 +128,6 @@ public class Arm : MonoBehaviour
             child.gameObject.layer = 0;
         }
         // start attach cooldown to prevent instant re attachment.
-        attachable = false;
         StartCoroutine(DetachCooldown());
 
         Debug.Log("Arm detached");
@@ -88,29 +135,36 @@ public class Arm : MonoBehaviour
 
     void SelectArm()
     {
+        selected = true;
         // find some components
         Rigidbody2D targetRb = target.GetComponent<Rigidbody2D>();
-        SpringJoint2D targetJoint = target.GetComponent<SpringJoint2D>();
-        // make arm independent from body
-        attachmentPointJoint.enabled = false;
-        attachmentPointJoint.connectedBody = null;
+        if (attached)
+        {
+            // make arm independent from body
+            attachmentPointJoint.enabled = false;
+            attachmentPointJoint.connectedBody = null;
+        }
         // make joint from target to arm
         targetRb.bodyType = RigidbodyType2D.Kinematic;
         targetRb.velocity = Vector2.zero;
         targetJoint.enabled = true;
 
-        Debug.Log("Arm deselected");
+        Debug.Log("Arm selected");
     }
 
     void DeselectArm()
     {
+        selected = false;
         // find some components
         Rigidbody2D targetRb = target.GetComponent<Rigidbody2D>();
-        SpringJoint2D targetJoint = target.GetComponent<SpringJoint2D>();
-        // make joint from attachmentpoint to target
-        attachmentPointJoint.enabled = true;
-        attachmentPointJoint.connectedBody = targetRb;
+        if (attached)
+        {
+            // make joint from attachmentpoint to target
+            attachmentPointJoint.enabled = true;
+            attachmentPointJoint.connectedBody = targetRb;
+        }
         // let target floooow
+        target.position = handSelector.position;
         targetRb.bodyType = RigidbodyType2D.Dynamic;
         targetJoint.enabled = false;
 
@@ -121,5 +175,18 @@ public class Arm : MonoBehaviour
     {
         yield return new WaitForSeconds(detachCooldownDuration);
         attachable = true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.gray;
+        Gizmos.DrawWireSphere(handSelector.position, selectorRadius);
+    }
+
+    private void OnJointBreak2D(Joint2D joint)
+    {
+        //DetachArm();
+        //gameObject.AddComponent<FixedJoint2D>();
+        // doe goeie waardes
     }
 }
