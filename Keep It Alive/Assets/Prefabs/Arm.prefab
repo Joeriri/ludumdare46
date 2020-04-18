@@ -154,7 +154,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4725467096820920725}
   - component: {fileID: 4725467096820920724}
-  - component: {fileID: 5734434261345448301}
   m_Layer: 0
   m_Name: Under Arm
   m_TagString: Untagged
@@ -226,32 +225,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &5734434261345448301
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4725467096820920730}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.34, y: 8.34}
-    newSize: {x: 8.34, y: 8.34}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 8.34, y: 8.34}
-  m_EdgeRadius: 0
 --- !u!1 &4725467097082044086
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,7 +297,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!58 &5734434263231798856
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -348,7 +321,7 @@ FixedJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4725467097082044086}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 0}
@@ -356,7 +329,7 @@ FixedJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 4.15, y: -0.38}
+  m_ConnectedAnchor: {x: 0, y: 0}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!114 &995447654246198874
@@ -375,6 +348,7 @@ MonoBehaviour:
   handSelector: {fileID: 1226692424458994598}
   selectorRadius: 0.4
   detachCooldownDuration: 1
+  limbBreakForce: 100
 --- !u!1 &4725467097734515113
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,7 +359,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4725467097734515112}
   - component: {fileID: 4725467097734515115}
-  - component: {fileID: 5734434262545762654}
   m_Layer: 0
   m_Name: Upper Arm
   m_TagString: Untagged
@@ -457,32 +430,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &5734434262545762654
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4725467097734515113}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.34, y: 8.34}
-    newSize: {x: 8.34, y: 8.34}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 8.34, y: 8.34}
-  m_EdgeRadius: 0
 --- !u!1 &4725467097973532426
 GameObject:
   m_ObjectHideFlags: 0
