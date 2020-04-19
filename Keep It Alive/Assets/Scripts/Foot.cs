@@ -27,6 +27,10 @@ public class Foot : MonoBehaviour
 
     private HingeJoint2D hingeJointFoot;
 
+    [Header("Attach on start")]
+    [SerializeField] private bool attachOnStart = false;
+    [SerializeField] private BodyJointBehaviour startJoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +38,22 @@ public class Foot : MonoBehaviour
         GetComponent<SpringJoint2D>().breakForce = springBreakForce;
         hingeJointFoot = gameObject.GetComponent<HingeJoint2D>();
         body = FindObjectOfType<MainBody>();
+
+        DeselectFoot();
+
+        if (attachOnStart)
+        {
+            if (startJoint != null)
+            {
+                AttachLeg(startJoint);
+                startJoint.attachedFoot = this;
+                startJoint.occupied = true;
+            }
+            else
+            {
+                Debug.LogError("Trying to attach a Foot on start, but no startJoint given!");
+            }
+        }
     }
 
     // Update is called once per frame
