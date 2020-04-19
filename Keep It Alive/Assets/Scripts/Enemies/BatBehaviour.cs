@@ -11,6 +11,7 @@ public class BatBehaviour: MonoBehaviour
     private Transform player;
     private Vector3 direction = Vector3.zero;
     private Vector3 directionOffset = Vector3.zero;
+    private bool goAway = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,14 @@ public class BatBehaviour: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        direction = Vector3.Normalize(Vector3.Normalize(player.position - transform.position) + directionOffset);
+        if (!goAway)
+        {
+            direction = Vector3.Normalize(Vector3.Normalize(player.position - transform.position) + directionOffset);
+        }
+        else
+        {
+            direction = Vector3.Normalize((Vector3.Normalize(player.position - transform.position) + directionOffset)*-1);
+        }
         transform.position += direction * batSpeed * Time.deltaTime;
     }
 
@@ -52,17 +60,18 @@ public class BatBehaviour: MonoBehaviour
 
         for (int i = 0; i < batwings.Length; i++)
         {
+            batwings[i].GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             batwings[i].animCancel = true;
         }
 
         Destroy(this);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public IEnumerator GoAway(float timer)
     {
-        if(collision.gameObject.tag == "Player")
-        {
-            //trigger damage ofzo (dit moet eigk gwn op de player trouwens)
-        }
+        goAway = true;
+        yield return new WaitForSeconds(timer);
+        goAway = false;
+        //Debug.Log("GoAwaaaaaaaaaay");
     }
 }

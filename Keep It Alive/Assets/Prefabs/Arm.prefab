@@ -215,7 +215,11 @@ MonoBehaviour:
   handSelector: {fileID: 7061485175786657886}
   selectorRadius: 0.4
   detachCooldownDuration: 1
+  attached: 0
   limbBreakForce: 100
+  attachmentPoint: {fileID: 0}
+  attachOnStart: 0
+  startJoint: {fileID: 0}
 --- !u!50 &4570507710746543537
 Rigidbody2D:
   serializedVersion: 4
@@ -495,9 +499,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7061485175786657886}
+  - component: {fileID: 4919636393699814906}
+  - component: {fileID: 289829760774258721}
   m_Layer: 0
   m_Name: HandSelector
-  m_TagString: Untagged
+  m_TagString: Fist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -516,3 +522,33 @@ Transform:
   m_Father: {fileID: 3561575799930230602}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &4919636393699814906
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6590828975666256910}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 15
+--- !u!114 &289829760774258721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6590828975666256910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e32158b400682a4db186cdc62a896e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fistCooldown: 0
+  parentArm: {fileID: 3561575798775661898}

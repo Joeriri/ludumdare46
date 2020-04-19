@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2364918074849084546}
   - component: {fileID: 2364918074849084557}
-  m_Layer: 11
+  - component: {fileID: 2027138124}
+  m_Layer: 12
   m_Name: LeftWingPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +49,31 @@ MonoBehaviour:
   flapMaxAngle: -100
   angleOffset: 20
   wingIsSnapped: 0
+  wingHp: 2
+  hitCooldownTime: 0.5
+  flyAwayTimer: 2
   animCancel: 0
+--- !u!50 &2027138124
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2364918074849084547}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &2364918075249449097
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +84,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2364918075249449096}
   - component: {fileID: 2364918075249449099}
-  m_Layer: 11
+  - component: {fileID: 832819046}
+  m_Layer: 12
   m_Name: RightWingPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +123,31 @@ MonoBehaviour:
   flapMaxAngle: 100
   angleOffset: 160
   wingIsSnapped: 0
+  wingHp: 2
+  hitCooldownTime: 0.5
+  flyAwayTimer: 2
   animCancel: 0
+--- !u!50 &832819046
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2364918075249449097}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &2364918075911758336
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +159,7 @@ GameObject:
   - component: {fileID: 2364918075911758339}
   - component: {fileID: 2364918075911758338}
   - component: {fileID: 2364918075911758349}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: BlankSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +267,7 @@ GameObject:
   - component: {fileID: 2364918076123444390}
   - component: {fileID: 2364918076123444385}
   - component: {fileID: 2364918076123444384}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: BlankSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

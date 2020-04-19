@@ -15,7 +15,7 @@ public class Arm_2 : MonoBehaviour
     [Header("Attachment")]
     [SerializeField] private float detachCooldownDuration = 1f;
     private bool attachable = true;
-    private bool attached = false;
+    [HideInInspector] public bool attached = false;
     [SerializeField] float limbBreakForce = Mathf.Infinity;
     [HideInInspector] public BodyJointBehaviour attachmentPoint;
 
