@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private bool inMenu = true;
+    private bool levelIsDone = false;
 
     [Header("Fade")]
     private FadeScreen fadeScreen;
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
         {
             if (Instance != this)
             {
-                Destroy(this);
+                Destroy(gameObject);
             }
         }
         else
@@ -30,16 +31,35 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
-
-        fadeScreen = FindObjectOfType<FadeScreen>();
     }
-    
-    void Start()
+
+    private void OnEnable()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("OnSceneLoaded: " + scene.name);
+        Debug.Log(mode);
+
+        levelIsDone = false;
+        fadeScreen = FindObjectOfType<FadeScreen>();
+
         if (SceneManager.GetActiveScene().buildIndex != 0)
         {
             StartCoroutine(FadeInLevelRoutine());
         }
+    }
+
+    void Start()
+    {
+        
     }
     
     void Update()
@@ -83,12 +103,16 @@ public class GameManager : MonoBehaviour
 
     public void GoToNextLevel()
     {
-        StartCoroutine(GoToNextLevelRoutine());
+        if (!levelIsDone)
+        {
+            levelIsDone = true;
+            StartCoroutine(GoToNextLevelRoutine());
+        }
     }
 
     private IEnumerator FadeInLevelRoutine()
     {
-        fadeScreen.StartFade(Color.clear, Color.black, fadeInDuration);
+        fadeScreen.StartFade(Color.black, Color.clear, fadeInDuration);
         yield return new WaitForSeconds(fadeInDuration);
     }
 

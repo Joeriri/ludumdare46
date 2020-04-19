@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BodyPart : MonoBehaviour
 {
-    [SerializeField] private bool hasHeart = false;
+    [SerializeField] public bool hasHeart = false;
     private BodyJointBehaviour attachmentPointChild;
 
     // Start is called before the first frame update
@@ -39,7 +39,6 @@ public class BodyPart : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("something collided");
         BatBehaviour tempBat = collision.collider.GetComponentInParent<BatBehaviour>();
         if (tempBat != null)
         {
