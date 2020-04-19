@@ -84,7 +84,6 @@ public class Foot : MonoBehaviour
             if (leg.hingeJointLeg.reactionForce.magnitude > limbBreakForce)
             {
                 DetachFoot();
-                Debug.LogWarning("foot was torn off :(");
             }
 
 
@@ -95,13 +94,6 @@ public class Foot : MonoBehaviour
                 DeselectFoot();
                 mouseCheck = false;
             }
-        }
-
-        if (Input.GetKeyUp(KeyCode.Mouse0))
-        {
-            gm.bodyPartClicked = null;
-            DeselectFoot();
-            mouseCheck = false;
         }
 
         if (attachedToMouse)
@@ -180,7 +172,7 @@ public class Foot : MonoBehaviour
         rb.isKinematic = false;
         attachedToMouse = false;
 
-        Debug.Log("Leg deselected");
+        Debug.Log("Foot deselected");
     }
 
     public void AttachLeg(BodyJointBehaviour bodyPoint)
@@ -248,7 +240,7 @@ public class Foot : MonoBehaviour
         // start attach cooldown to prevent instant re attachment.
         StartCoroutine(DetachCooldown());
 
-        Debug.Log("Arm detached");
+        Debug.Log("Foot detached");
     }
 
     private void OnJointBreak2D(Joint2D joint)
@@ -257,7 +249,6 @@ public class Foot : MonoBehaviour
         {
             //AddSpringJoint2D();
             DetachFoot();
-            Debug.LogWarning("joint broke :(");
         }
     }
 
