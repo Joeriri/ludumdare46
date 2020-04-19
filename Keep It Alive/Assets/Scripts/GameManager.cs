@@ -1,10 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private BodyPart bodyPartToDestroy;
+
+    [Header("Fade")]
+    private FadeScreen fadeScreen;
+    [SerializeField] private float fadeInDuration = 1f;
+    [SerializeField] private float fadeOutDuration = 1f;
+
+    [HideInInspector] public GameObject bodyPartClicked = null;
 
     public static GameManager Instance;
 
@@ -22,15 +30,18 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
-    }
 
-    // Start is called before the first frame update
+        fadeScreen = FindObjectOfType<FadeScreen>();
+    }
+    
     void Start()
     {
-        
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            StartCoroutine(FadeInLevelRoutine());
+        }
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         // Debug cheat om bodyparts te destroyen
@@ -53,5 +64,23 @@ public class GameManager : MonoBehaviour
     public void EndIntroPan()
     {
         Debug.Log("game is go!");
+    }
+
+    public void GoToNextLevel()
+    {
+        StartCoroutine(GoToNextLevelRoutine());
+    }
+
+    private IEnumerator FadeInLevelRoutine()
+    {
+        fadeScreen.StartFade(Color.clear, Color.black, fadeInDuration);
+        yield return new WaitForSeconds(fadeInDuration);
+    }
+
+    private IEnumerator GoToNextLevelRoutine()
+    {
+        fadeScreen.StartFade(Color.clear, Color.black, fadeOutDuration);
+        yield return new WaitForSeconds(fadeOutDuration);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
