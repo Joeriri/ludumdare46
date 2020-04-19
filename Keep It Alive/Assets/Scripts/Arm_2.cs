@@ -86,7 +86,7 @@ public class Arm_2 : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                if (Vector2.Distance(mousePos, handSelector.position) < selectorRadius)
+                if (Vector2.Distance(mousePos, handSelector.position) < selectorRadius && selected == false)
                 {
                     if (gm.bodyPartClicked == null)
                     {
@@ -99,7 +99,7 @@ public class Arm_2 : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (gm.bodyPartClicked == this.gameObject)
+        if (gm.bodyPartClicked == this.gameObject && selected == false)
         {
             SelectArm();
         }
