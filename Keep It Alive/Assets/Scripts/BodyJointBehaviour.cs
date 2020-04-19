@@ -26,7 +26,7 @@ public class BodyJointBehaviour : MonoBehaviour
     {
         if(collision.gameObject.tag == "Limb")
         {
-            Arm arm = collision.gameObject.GetComponent<Arm>();
+            Arm_2 arm = collision.gameObject.GetComponent<Arm_2>();
             if(arm == null) 
             { 
                 Leg leg = collision.gameObject.GetComponent<Leg>();
