@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,6 +39,11 @@ public class GameManager : MonoBehaviour
         {
             bodyPartToDestroy.DestroyBodyPart();
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestartGame();
+        }
     }
     
     public void FrankDie()
@@ -53,5 +59,10 @@ public class GameManager : MonoBehaviour
     public void EndIntroPan()
     {
         Debug.Log("game is go!");
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 }
