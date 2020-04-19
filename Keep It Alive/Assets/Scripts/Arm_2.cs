@@ -152,6 +152,11 @@ public class Arm_2 : MonoBehaviour
         // start attach cooldown to prevent instant re attachment.
         StartCoroutine(DetachCooldown());
 
+        // play sound
+        string randomRipSound = "Rip_" + Random.Range(1, 3).ToString();
+        AudioManager.instance.Play(randomRipSound);
+        AudioManager.instance.ChangePitch(randomRipSound, Random.Range(0.7f, 1.3f));
+
         Debug.Log("Arm detached");
     }
 
