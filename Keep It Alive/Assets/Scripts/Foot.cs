@@ -66,7 +66,7 @@ public class Foot : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (Vector2.Distance(mousePos, footSelector.position) < selectorRadius)
+            if (Vector2.Distance(mousePos, footSelector.position) < selectorRadius && selected == false)
             {
                 if (gm.bodyPartClicked == null)
                 {
@@ -84,9 +84,7 @@ public class Foot : MonoBehaviour
             if (leg.hingeJointLeg.reactionForce.magnitude > limbBreakForce)
             {
                 DetachFoot();
-                Debug.LogWarning("foot was torn off :(");
             }
-
 
             // Deselect the arm
             if (Input.GetKeyUp(KeyCode.Mouse0))
@@ -95,13 +93,6 @@ public class Foot : MonoBehaviour
                 DeselectFoot();
                 mouseCheck = false;
             }
-        }
-
-        if (Input.GetKeyUp(KeyCode.Mouse0))
-        {
-            gm.bodyPartClicked = null;
-            DeselectFoot();
-            mouseCheck = false;
         }
 
         if (attachedToMouse)
@@ -137,7 +128,7 @@ public class Foot : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (gm.bodyPartClicked == this.gameObject)
+        if (gm.bodyPartClicked == this.gameObject && selected == false)
         {
             SelectFoot();
         }
@@ -145,26 +136,23 @@ public class Foot : MonoBehaviour
 
     void SelectFoot()
     {
+        selected = true;
+
+        // Add a rigidbody if there is none here
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb == null) { rb = gameObject.AddComponent<Rigidbody2D>(); }
-
+        // make foot non-physics
         rb.isKinematic = true;
-
-        selected = true;
-        if (attached)
-        {
-            // make arm independent from body
-            //attachmentPointJoint.enabled = false;
-            //attachmentPointJoint.connectedBody = null;
-        }
 
         Debug.Log("Foot selected");
     }
 
     void DeselectFoot()
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
         selected = false;
+
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
         if (attached)
         {
             attachmentPointJoint.enabled = true;
@@ -180,7 +168,7 @@ public class Foot : MonoBehaviour
         rb.isKinematic = false;
         attachedToMouse = false;
 
-        Debug.Log("Leg deselected");
+        Debug.Log("Foot deselected");
     }
 
     public void AttachLeg(BodyJointBehaviour bodyPoint)
@@ -248,7 +236,7 @@ public class Foot : MonoBehaviour
         // start attach cooldown to prevent instant re attachment.
         StartCoroutine(DetachCooldown());
 
-        Debug.Log("Arm detached");
+        Debug.Log("Foot detached");
     }
 
     private void OnJointBreak2D(Joint2D joint)
@@ -257,7 +245,6 @@ public class Foot : MonoBehaviour
         {
             //AddSpringJoint2D();
             DetachFoot();
-            Debug.LogWarning("joint broke :(");
         }
     }
 
