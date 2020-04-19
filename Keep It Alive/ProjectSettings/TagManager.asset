@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Limb
   - Enemy
+  - Heart
   layers:
   - Default
   - TransparentFX

@@ -36,4 +36,16 @@ public class BodyPart : MonoBehaviour
         Debug.Log("Body part " + gameObject.name + " was destroyed!");
         Destroy(gameObject);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("something collided");
+        BatBehaviour tempBat = collision.collider.GetComponentInParent<BatBehaviour>();
+        if (tempBat != null)
+        {
+            Debug.Log("A bat killed a part of Frank");
+            DestroyBodyPart();
+            tempBat.WingSnapped();
+        }
+    }
 }

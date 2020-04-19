@@ -10,7 +10,18 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance != null)
+        {
+            if (Instance != this)
+            {
+                Destroy(this);
+            }
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
     }
 
     // Start is called before the first frame update
@@ -32,5 +43,15 @@ public class GameManager : MonoBehaviour
     public void FrankDie()
     {
         Debug.Log("FRANK IS DOOD ;_;");
+    }
+
+    public void StartIntroPan()
+    {
+        Camera.main.GetComponent<Animator>().Play("IntroPan");
+    }
+
+    public void EndIntroPan()
+    {
+        Debug.Log("game is go!");
     }
 }

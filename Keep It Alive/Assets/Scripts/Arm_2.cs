@@ -19,6 +19,10 @@ public class Arm_2 : MonoBehaviour
     [SerializeField] float limbBreakForce = Mathf.Infinity;
     [HideInInspector] public BodyJointBehaviour attachmentPoint;
 
+    [Header("Attach on start")]
+    [SerializeField] private bool attachOnStart = false;
+    [SerializeField] private BodyJointBehaviour startJoint;
+
     private MainBody body;
     private FixedJoint2D fixedJoint;
     private Rigidbody2D rb;
@@ -33,6 +37,22 @@ public class Arm_2 : MonoBehaviour
         body = FindObjectOfType<MainBody>();
         targetJoint = target.GetComponent<SpringJoint2D>();
         targetRb = target.GetComponent<Rigidbody2D>();
+
+        DeselectArm();
+
+        if (attachOnStart)
+        {
+            if (startJoint != null)
+            {
+                AttachArm(startJoint);
+                startJoint.attachedArm = this;
+                startJoint.occupied = true;
+            }
+            else
+            {
+                Debug.LogError("Trying to attach an Arm on start, but no startJoint given!");
+            }
+        }
     }
 
     // Update is called once per frame
