@@ -17,7 +17,7 @@ public class Arm_2 : MonoBehaviour
     private bool attachable = true;
     private bool attached = false;
     [SerializeField] float limbBreakForce = Mathf.Infinity;
-    private BodyJointBehaviour attachmentPoint;
+    [HideInInspector] public BodyJointBehaviour attachmentPoint;
 
     private MainBody body;
     private FixedJoint2D fixedJoint;
@@ -33,9 +33,6 @@ public class Arm_2 : MonoBehaviour
         body = FindObjectOfType<MainBody>();
         targetJoint = target.GetComponent<SpringJoint2D>();
         targetRb = target.GetComponent<Rigidbody2D>();
-
-        DetachArm();
-        //DeselectArm();
     }
 
     // Update is called once per frame
@@ -103,6 +100,8 @@ public class Arm_2 : MonoBehaviour
         attachable = false;
 
         // make lose of body
+        //attachmentPoint.attachedArm = null;
+        //attachmentPoint.attachable = true;
         attachmentPoint = null;
         fixedJoint.enabled = false;
 
