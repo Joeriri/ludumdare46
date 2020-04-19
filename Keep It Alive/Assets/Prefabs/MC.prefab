@@ -412,6 +412,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9429b9f786eaee84abb733a026009931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attachedArms: []
+  attachedLegs: []
+  initialArmBreak: 10
+  initialLegBreak: 200
+  addedArmBreak: 20
+  addedLegBreak: 38
+  armMultiplier: 1
+  legMultiplier: 3
+  armBreak: 0
+  legBreak: 0
+  footBreak: Infinity
 --- !u!61 &8099457616855930968
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -9,8 +9,8 @@ public class Foot : MonoBehaviour
     [SerializeField] private Leg leg;
 
     [SerializeField] private float detachCooldownDuration = 1f;
-    [SerializeField] private float limbBreakForce = Mathf.Infinity;
-    [SerializeField] private float springBreakForce = Mathf.Infinity;
+    //[SerializeField] private float limbBreakForce = Mathf.Infinity;
+    //[SerializeField] private float springBreakForce = Mathf.Infinity;
 
     [SerializeField] private float springFreq = 1;
     [SerializeField] private float springDistance = 1;
@@ -39,7 +39,6 @@ public class Foot : MonoBehaviour
     {
         gm = FindObjectOfType<GameManager>();
         attachmentPointJoint = GetComponent<SpringJoint2D>();
-        GetComponent<SpringJoint2D>().breakForce = springBreakForce;
         hingeJointFoot = gameObject.GetComponent<HingeJoint2D>();
         body = FindObjectOfType<MainBody>();
 
@@ -63,6 +62,8 @@ public class Foot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GetComponent<SpringJoint2D>().breakForce = body.footBreak;
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -81,7 +82,7 @@ public class Foot : MonoBehaviour
             transform.position = mousePos;
 
             // arm break
-            if (leg.hingeJointLeg.reactionForce.magnitude > limbBreakForce)
+            if (leg.hingeJointLeg.reactionForce.magnitude > body.legBreak)
             {
                 DetachFoot();
             }
@@ -179,6 +180,7 @@ public class Foot : MonoBehaviour
             attached = true;
             attachable = false;
 
+            body.attachedLegs.Add(this);
             attachmentPoint = bodyPoint;
             attachmentPointRb = attachmentPoint.GetComponent<Rigidbody2D>();
             attachmentPointJoint = GetComponent<SpringJoint2D>();
@@ -215,6 +217,7 @@ public class Foot : MonoBehaviour
         attached = false;
         attachable = false;
 
+        body.attachedLegs.Remove(this);
         attachmentPointJoint.enabled = false;
 
         //attachmentPointJoint.autoConfigureDistance = true;
@@ -253,7 +256,7 @@ public class Foot : MonoBehaviour
         SpringJoint2D dikkeJoint = GetComponent<SpringJoint2D>();
         if (dikkeJoint == null) { dikkeJoint = gameObject.AddComponent<SpringJoint2D>(); }
         dikkeJoint.enabled = false;
-        dikkeJoint.breakForce = springBreakForce;
+        dikkeJoint.breakForce = body.footBreak;
     }
 
     IEnumerator DetachCooldown()

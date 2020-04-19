@@ -16,7 +16,7 @@ public class Arm_2 : MonoBehaviour
     [SerializeField] private float detachCooldownDuration = 1f;
     private bool attachable = true;
     [HideInInspector] public bool attached = false;
-    [SerializeField] float limbBreakForce = Mathf.Infinity;
+    //[SerializeField] float limbBreakForce = Mathf.Infinity;
     [HideInInspector] public BodyJointBehaviour attachmentPoint;
 
     [Header("Attach on start")]
@@ -67,7 +67,7 @@ public class Arm_2 : MonoBehaviour
             target.transform.position = mousePos;
 
             // arm break
-            if (fixedJoint.reactionForce.magnitude > limbBreakForce)
+            if (fixedJoint.reactionForce.magnitude > body.armBreak)
             {
                 DetachArm();
                 Debug.Log("Arm broke off!");
@@ -113,6 +113,7 @@ public class Arm_2 : MonoBehaviour
             attachable = false;
 
             // Stick to body
+            body.attachedArms.Add(this);
             attachmentPoint = bodyPoint;
             transform.position = attachmentPoint.transform.position;
             fixedJoint.enabled = true;
@@ -134,6 +135,7 @@ public class Arm_2 : MonoBehaviour
         attached = false;
         attachable = false;
 
+        body.attachedArms.Remove(this);
         // make lose of body
         //attachmentPoint.attachedArm = null;
         //attachmentPoint.attachable = true;
