@@ -10,6 +10,7 @@ public class Foot : MonoBehaviour
 
     [SerializeField] private float detachCooldownDuration = 1f;
     [SerializeField] private float limbBreakForce = Mathf.Infinity;
+    [SerializeField] private float springBreakForce = Mathf.Infinity;
 
     [SerializeField] private float springFreq = 1;
     [SerializeField] private float springDistance = 1;
@@ -21,7 +22,7 @@ public class Foot : MonoBehaviour
     private Rigidbody2D attachmentPointRb;
     private SpringJoint2D attachmentPointJoint;
 
-    public BodyJointBehaviour attachmentPoint;
+    public BodyJointBehaviour attachmentPoint = null;
     private MainBody body;
 
     private HingeJoint2D hingeJointFoot;
@@ -29,6 +30,8 @@ public class Foot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        attachmentPointJoint = GetComponent<SpringJoint2D>();
+        GetComponent<SpringJoint2D>().breakForce = springBreakForce;
         hingeJointFoot = gameObject.GetComponent<HingeJoint2D>();
         body = FindObjectOfType<MainBody>();
     }
@@ -75,6 +78,20 @@ public class Foot : MonoBehaviour
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = mousePos;
         }
+
+        if(attachmentPointJoint != null)
+        {
+            if (attachmentPointJoint.enabled == true && attachmentPoint != null)
+            {
+                attachmentPointJoint.connectedAnchor = new Vector2(body.transform.InverseTransformPoint(attachmentPoint.transform.position).x, body.transform.InverseTransformPoint(attachmentPoint.transform.position).y);
+            }
+        }
+
+        if(GetComponent<SpringJoint2D>() == null)
+        {
+            AddSpringJoint2D();
+        }
+
 
         //if(attachmentPoint != null)
         //{
@@ -141,7 +158,7 @@ public class Foot : MonoBehaviour
             //attachmentPointJoint = attachmentPoint.GetComponent<SpringJoint2D>();
 
             attachmentPointJoint.autoConfigureDistance = false;
-            attachmentPointJoint.connectedAnchor = new Vector2 (body.transform.InverseTransformPoint(bodyPoint.transform.position).x, body.transform.InverseTransformPoint(bodyPoint.transform.position).y);
+            //attachmentPointJoint.connectedAnchor = new Vector2 (body.transform.InverseTransformPoint(bodyPoint.transform.position).x, body.transform.InverseTransformPoint(bodyPoint.transform.position).y);
             //attachmentPointJoint.autoConfigureConnectedAnchor = true;
             attachmentPointJoint.distance = springDistance;
             attachmentPointJoint.frequency = springFreq;
@@ -171,6 +188,8 @@ public class Foot : MonoBehaviour
         attached = false;
         attachable = false;
 
+        attachmentPointJoint.enabled = false;
+
         //attachmentPointJoint.autoConfigureDistance = true;
         //attachmentPointJoint.frequency = 1;
 
@@ -191,6 +210,23 @@ public class Foot : MonoBehaviour
         StartCoroutine(DetachCooldown());
 
         Debug.Log("Arm detached");
+    }
+
+    private void OnJointBreak2D(Joint2D joint)
+    {
+        if( joint == attachmentPointJoint)
+        {
+            //AddSpringJoint2D();
+            DetachFoot();
+        }
+    }
+
+    private void AddSpringJoint2D()
+    {
+        SpringJoint2D dikkeJoint = GetComponent<SpringJoint2D>();
+        if (dikkeJoint == null) { dikkeJoint = gameObject.AddComponent<SpringJoint2D>(); }
+        dikkeJoint.enabled = false;
+        dikkeJoint.breakForce = springBreakForce;
     }
 
     IEnumerator DetachCooldown()
