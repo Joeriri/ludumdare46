@@ -90,6 +90,16 @@ public class GameManager : MonoBehaviour
         Debug.Log("FRANK IS DOOD ;_;");
     }
 
+    public void stopCamera()
+    {
+        Camera.main.GetComponent<CameraMovement>().enabled = false;
+    }
+
+    public void ResumeCamera()
+    {
+        Camera.main.GetComponent<CameraMovement>().enabled = true;
+    }
+
     public void StartIntroPan()
     {
         inMenu = false;
