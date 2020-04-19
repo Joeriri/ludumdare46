@@ -10,7 +10,7 @@ public class Leg : MonoBehaviour
 
     public BodyJointBehaviour attachmentPoint;
 
-    private void Start()
+    private void Awake()
     {
         hingeJointLeg = gameObject.GetComponent<HingeJoint2D>();
         body = FindObjectOfType<MainBody>();
@@ -25,6 +25,7 @@ public class Leg : MonoBehaviour
 
         hingeJointLeg.enabled = true;
         hingeJointLeg.connectedBody = body.GetComponent<Rigidbody2D>();
+        hingeJointLeg.connectedAnchor = new Vector2(body.transform.InverseTransformPoint(attachmentPoint.transform.position).x, body.transform.InverseTransformPoint(attachmentPoint.transform.position).y);
 
         Transform[] _children = GetComponentsInChildren<Transform>();
         foreach (Transform child in _children)

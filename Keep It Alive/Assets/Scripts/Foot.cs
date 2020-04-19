@@ -77,7 +77,7 @@ public class Foot : MonoBehaviour
             if (leg.hingeJointLeg.reactionForce.magnitude > limbBreakForce)
             {
                 DetachFoot();
-                Debug.Log("Arm broke off!");
+                Debug.LogWarning("foot was torn off :(");
             }
 
 
@@ -238,6 +238,7 @@ public class Foot : MonoBehaviour
         {
             //AddSpringJoint2D();
             DetachFoot();
+            Debug.LogWarning("joint broke :(");
         }
     }
 
