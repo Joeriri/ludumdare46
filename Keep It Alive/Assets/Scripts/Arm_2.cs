@@ -28,9 +28,12 @@ public class Arm_2 : MonoBehaviour
     private Rigidbody2D rb;
     private SpringJoint2D springJoint;
 
+    private GameManager gm;
+
     // Start is called before the first frame update
     void Start()
     {
+        gm = FindObjectOfType<GameManager>();
         fixedJoint = GetComponent<FixedJoint2D>();
         springJoint = GetComponent<SpringJoint2D>();
         rb = GetComponent<Rigidbody2D>();
@@ -73,6 +76,7 @@ public class Arm_2 : MonoBehaviour
             // Deselect the arm
             if (Input.GetKeyUp(KeyCode.Mouse0))
             {
+                gm.bodyPartClicked = null;
                 DeselectArm();
             }
         }
@@ -84,9 +88,20 @@ public class Arm_2 : MonoBehaviour
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 if (Vector2.Distance(mousePos, handSelector.position) < selectorRadius)
                 {
-                    SelectArm();
+                    if (gm.bodyPartClicked == null)
+                    {
+                        gm.bodyPartClicked = this.gameObject;
+                    }
                 }
             }
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (gm.bodyPartClicked == this.gameObject)
+        {
+            SelectArm();
         }
     }
 

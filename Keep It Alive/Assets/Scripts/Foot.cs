@@ -31,9 +31,13 @@ public class Foot : MonoBehaviour
     [SerializeField] private bool attachOnStart = false;
     [SerializeField] private BodyJointBehaviour startJoint;
 
+    private GameManager gm;
+    private bool mouseCheck;
+
     // Start is called before the first frame update
     void Start()
     {
+        gm = FindObjectOfType<GameManager>();
         attachmentPointJoint = GetComponent<SpringJoint2D>();
         GetComponent<SpringJoint2D>().breakForce = springBreakForce;
         hingeJointFoot = gameObject.GetComponent<HingeJoint2D>();
@@ -64,7 +68,10 @@ public class Foot : MonoBehaviour
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (Vector2.Distance(mousePos, footSelector.position) < selectorRadius)
             {
-                SelectFoot();
+                if (gm.bodyPartClicked == null)
+                {
+                    gm.bodyPartClicked = this.gameObject;
+                }
             }
         }
 
@@ -84,13 +91,17 @@ public class Foot : MonoBehaviour
             // Deselect the arm
             if (Input.GetKeyUp(KeyCode.Mouse0))
             {
+                gm.bodyPartClicked = null;
                 DeselectFoot();
+                mouseCheck = false;
             }
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
+            gm.bodyPartClicked = null;
             DeselectFoot();
+            mouseCheck = false;
         }
 
         if (attachedToMouse)
@@ -122,6 +133,14 @@ public class Foot : MonoBehaviour
         //        Debug.Log("Ayy");
         //    }
         //}
+    }
+
+    private void LateUpdate()
+    {
+        if (gm.bodyPartClicked == this.gameObject)
+        {
+            SelectFoot();
+        }
     }
 
     void SelectFoot()
