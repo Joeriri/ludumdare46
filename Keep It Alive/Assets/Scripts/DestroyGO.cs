@@ -41,7 +41,7 @@ public class DestroyGO : MonoBehaviour
 
             yield return null;
         }
-
+        
         Destroy(gameObject);
         yield return null;
     }

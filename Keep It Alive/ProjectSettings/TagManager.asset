@@ -19,8 +19,8 @@ TagManager:
   - Limb
   - AttachedLimb
   - EnemyLimb
-  - 
-  - 
+  - Enemy
+  - Environment
   - 
   - 
   - 
