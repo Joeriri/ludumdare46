@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private BodyPart bodyPartToDestroy;
+    private bool inMenu = true;
 
     [Header("Fade")]
     private FadeScreen fadeScreen;
@@ -44,10 +44,24 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
-        // Debug cheat om bodyparts te destroyen
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.R) && !inMenu)
         {
-            bodyPartToDestroy.DestroyBodyPart();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Debug.Log("Restarting level");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (inMenu)
+            {
+                Application.Quit();
+                Debug.Log("Quitting application");
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                Debug.Log("Returning to menu");
+            }
         }
     }
     
@@ -58,6 +72,7 @@ public class GameManager : MonoBehaviour
 
     public void StartIntroPan()
     {
+        inMenu = false;
         Camera.main.GetComponent<Animator>().Play("IntroPan");
     }
 
