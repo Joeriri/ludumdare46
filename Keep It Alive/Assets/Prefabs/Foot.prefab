@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 1739480147753313997}
   - component: {fileID: 1739480147753313996}
   m_Layer: 0
-  m_Name: Foot 1
+  m_Name: Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -204,11 +204,13 @@ MonoBehaviour:
   selectorRadius: 0.5
   leg: {fileID: 0}
   detachCooldownDuration: 1
-  limbBreakForce: 100
-  springBreakForce: 400
-  springFreq: 2.3
+  limbBreakForce: 600
+  springBreakForce: Infinity
+  springFreq: 6
   springDistance: 1.7
   attachmentPoint: {fileID: 0}
+  attachOnStart: 1
+  startJoint: {fileID: 0}
 --- !u!231 &1739480147753313996
 SpringJoint2D:
   m_ObjectHideFlags: 0
