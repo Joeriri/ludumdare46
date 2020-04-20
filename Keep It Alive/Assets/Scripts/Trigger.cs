@@ -1,14 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Finish : MonoBehaviour
+public class Trigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] UnityEvent triggerEvent = new UnityEvent();
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -17,7 +14,7 @@ public class Finish : MonoBehaviour
         {
             if (tempPart.hasHeart)
             {
-                GameManager.Instance.GoToNextLevel();
+                triggerEvent.Invoke();
             }
         }
     }
