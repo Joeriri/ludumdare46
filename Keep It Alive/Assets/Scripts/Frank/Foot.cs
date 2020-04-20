@@ -231,6 +231,12 @@ public class Foot : MonoBehaviour
                 child.gameObject.layer = 8;
             }
 
+            // if first limb to attach, cue the music
+            if (!GameManager.Instance.hasAttachedFirstLimb)
+            {
+                GameManager.Instance.AttachedFirstLimb();
+            }
+
             Debug.Log("Foot Attached");
         }
     }

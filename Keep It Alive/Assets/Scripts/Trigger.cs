@@ -9,11 +9,14 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
+        Debug.LogWarning("a thing collided");
         BodyPart tempPart = collider.GetComponent<BodyPart>();
         if (tempPart != null)
         {
+            Debug.LogWarning("bodypart collided");
             if (tempPart.hasHeart)
             {
+                Debug.LogWarning("it worked");
                 triggerEvent.Invoke();
             }
         }

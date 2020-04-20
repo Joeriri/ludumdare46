@@ -151,6 +151,12 @@ public class Arm_2 : MonoBehaviour
             {
                 child.gameObject.layer = 8;
             }
+
+            // if first limb to attach, cue the music
+            if (!GameManager.Instance.hasAttachedFirstLimb)
+            {
+                GameManager.Instance.AttachedFirstLimb();
+            }
             
             Debug.Log("Arm attached");
         }

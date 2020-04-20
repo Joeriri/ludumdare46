@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     private bool inMenu = true;
     private bool levelIsDone = false;
+    public bool hasAttachedFirstLimb = false;
 
     [Header("Intro Pan")]
     [SerializeField] private AnimationClip introPanAnim;
@@ -80,7 +81,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                StartCoroutine(RestartLevelRoutine());
                 Debug.Log("Returning to menu");
             }
         }
@@ -88,6 +89,7 @@ public class GameManager : MonoBehaviour
     
     public void FrankDie()
     {
+        StartCoroutine(RestartLevelRoutine());
         Debug.Log("FRANK IS DOOD ;_;");
     }
 
@@ -119,13 +121,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GoToNextLevel()
+    public void AttachedFirstLimb()
     {
-        if (!levelIsDone)
-        {
-            levelIsDone = true;
-            StartCoroutine(GoToNextLevelRoutine());
-        }
+        hasAttachedFirstLimb = true;
+        AudioManager.instance.Play("Music");
+    }
+
+    public void EndGame()
+    {
+        Debug.Log("It is finished. It is done.");
     }
 
     private IEnumerator FadeInLevelRoutine()
@@ -134,11 +138,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(fadeInDuration);
     }
 
-    private IEnumerator GoToNextLevelRoutine()
+    private IEnumerator RestartLevelRoutine()
     {
         fadeScreen.StartFade(Color.clear, Color.black, fadeOutDuration);
         yield return new WaitForSeconds(fadeOutDuration);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private IEnumerator IntroSoundPitchFade(float oldPitch, float newPitch, float duration)
