@@ -415,11 +415,11 @@ MonoBehaviour:
   attachedArms: []
   attachedLegs: []
   initialArmBreak: 10
-  initialLegBreak: 100
+  initialLegBreak: 80
   addedArmBreak: 20
   addedLegBreak: 30
   armMultiplier: 1
-  legMultiplier: 3
+  legMultiplier: 2.45
   springNotActiveSubtraction: 0
   springNotActiveDivision: 1.3
   armBreak: 0
