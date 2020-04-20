@@ -29,6 +29,7 @@ public class Foot : MonoBehaviour
     private bool attachCooldown = false;
     private bool selected;
     private Vector2 mouseOffset;
+    private Vector2 selectorOffset;
     private Rigidbody2D attachmentPointRb;
     private SpringJoint2D attachmentPointJoint;
     private MainBody body;
@@ -43,7 +44,7 @@ public class Foot : MonoBehaviour
         attachmentPointJoint = GetComponent<SpringJoint2D>();
         hingeJointFoot = gameObject.GetComponent<HingeJoint2D>();
         body = FindObjectOfType<MainBody>();
-
+        selectorOffset = new Vector2(footSelector.localPosition.x, footSelector.localPosition.y);
         DeselectFoot();
 
         if (attachOnStart)
@@ -82,7 +83,7 @@ public class Foot : MonoBehaviour
         if (selected)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = mousePos + mouseOffset;
+            transform.position = mousePos - selectorOffset + mouseOffset ;
 
             // arm break
             if (attachmentPointJoint.enabled && attachmentPointJoint.connectedBody == body.GetComponent<Rigidbody2D>())

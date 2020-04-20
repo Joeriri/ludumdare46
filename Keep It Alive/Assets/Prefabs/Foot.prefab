@@ -166,7 +166,7 @@ MonoBehaviour:
   selectorRadius: 0.4
   springFreq: 5
   springDistance: 1.7
-  attachCooldownTimer: 0.05
+  attachCooldownTimer: 0.1
   detachCooldownDuration: 1
   attachOnStart: 0
   startJoint: {fileID: 0}

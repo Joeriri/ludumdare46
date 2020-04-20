@@ -527,11 +527,6 @@ PrefabInstance:
       propertyPath: startJoint
       value: 
       objectReference: {fileID: 604459879}
-    - target: {fileID: 3561575798775661898, guid: fa493586b7a0f834c9d4148edf44dbf6,
-        type: 3}
-      propertyPath: attachCooldownTimer
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 3561575798775661902, guid: fa493586b7a0f834c9d4148edf44dbf6,
         type: 3}
       propertyPath: m_Name
