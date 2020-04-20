@@ -22,8 +22,13 @@ public class MainBody : MonoBehaviour
     [SerializeField] float armMultiplier = 1;
     [SerializeField] float legMultiplier = 1;
 
+    [Header("Spring Not Active")]
+    [SerializeField] float springNotActiveSubtraction = 1;
+    [SerializeField] float springNotActiveDivision = 1;
+
     [HideInInspector] public float armBreak = 1;
-    [HideInInspector] public float legBreak = 1;
+    public float legBreak = 1;
+    public float legBreakWhileSpringNotActive = 1;
     [HideInInspector] public float footBreak = 1;
 
     // Update is called once per frame
@@ -31,6 +36,7 @@ public class MainBody : MonoBehaviour
     {
         armBreak = initialArmBreak + (addedArmBreak * attachedArms.Count * armMultiplier) + (addedArmBreak * attachedLegs.Count * legMultiplier);
         legBreak = initialLegBreak + (addedLegBreak * attachedArms.Count * armMultiplier) + (addedLegBreak * attachedLegs.Count * legMultiplier);
+        legBreakWhileSpringNotActive = (initialLegBreak + (addedLegBreak * attachedArms.Count * armMultiplier) + (addedLegBreak * attachedLegs.Count * legMultiplier))/springNotActiveDivision - springNotActiveSubtraction;
         footBreak = Mathf.Infinity;
     }
 }

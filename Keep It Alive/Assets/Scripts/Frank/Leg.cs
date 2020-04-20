@@ -5,14 +5,14 @@ using UnityEngine;
 public class Leg : MonoBehaviour
 {
     public Foot foot;
-    public HingeJoint2D hingeJointLeg;
+    public SpringJoint2D hingeJointLeg;
     private MainBody body;
 
     public BodyJointBehaviour attachmentPoint;
 
     private void Awake()
     {
-        hingeJointLeg = gameObject.GetComponent<HingeJoint2D>();
+        hingeJointLeg = gameObject.GetComponent<SpringJoint2D>();
         body = FindObjectOfType<MainBody>();
     }
 
@@ -23,9 +23,10 @@ public class Leg : MonoBehaviour
 
         transform.position = new Vector3(attachmentPoint.transform.position.x - 0.5f * transform.up.x, attachmentPoint.transform.position.y - 0.5f*transform.up.y, attachmentPoint.transform.position.z);
 
-        hingeJointLeg.enabled = true;
         hingeJointLeg.connectedBody = body.GetComponent<Rigidbody2D>();
         hingeJointLeg.connectedAnchor = new Vector2(body.transform.InverseTransformPoint(attachmentPoint.transform.position).x, body.transform.InverseTransformPoint(attachmentPoint.transform.position).y);
+        transform.position = new Vector3(attachmentPoint.transform.position.x - 0.5f * transform.up.x, attachmentPoint.transform.position.y - 0.5f*transform.up.y, attachmentPoint.transform.position.z);
+        hingeJointLeg.enabled = true;
 
         Transform[] _children = GetComponentsInChildren<Transform>();
         foreach (Transform child in _children)

@@ -15,7 +15,7 @@ public class Foot : MonoBehaviour
     [SerializeField] private float springFreq = 1;
     [SerializeField] private float springDistance = 1;
 
-    private bool attachedToMouse = false;
+    //private bool attachedToMouse = false;
     private bool attachable = true;
     private bool attached = false;
     private bool selected;
@@ -33,10 +33,12 @@ public class Foot : MonoBehaviour
 
     private GameManager gm;
     private bool mouseCheck;
+    private Vector2 mouseOffset;
 
     // Start is called before the first frame update
     void Start()
     {
+        //attachmentPointJoint = GetComponent<SpringJoint2D>();
         gm = FindObjectOfType<GameManager>();
         attachmentPointJoint = GetComponent<SpringJoint2D>();
         hingeJointFoot = gameObject.GetComponent<HingeJoint2D>();
@@ -79,13 +81,28 @@ public class Foot : MonoBehaviour
         if (selected)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = mousePos;
+            transform.position = mousePos + mouseOffset;
 
             // arm break
-            if (leg.hingeJointLeg.reactionForce.magnitude > body.legBreak)
+            if (attachmentPointJoint.enabled && attachmentPointJoint.connectedBody == body.GetComponent<Rigidbody2D>())
             {
-                DetachFoot();
+                //Debug.LogWarning("Yes");
+                if (leg.hingeJointLeg.reactionForce.magnitude > body.legBreak)
+                {
+                    DetachFoot();
+                }
             }
+            else
+            {
+                //Debug.LogWarning("No");
+                if (leg.hingeJointLeg.reactionForce.magnitude > body.legBreakWhileSpringNotActive)
+                {
+                    DetachFoot();
+                }
+            }
+
+            Debug.LogWarning(leg.hingeJointLeg.reactionForce);
+            
 
             // Deselect the arm
             if (Input.GetKeyUp(KeyCode.Mouse0))
@@ -94,12 +111,6 @@ public class Foot : MonoBehaviour
                 DeselectFoot();
                 mouseCheck = false;
             }
-        }
-
-        if (attachedToMouse)
-        {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = mousePos;
         }
 
         if(attachmentPointJoint != null)
@@ -137,7 +148,9 @@ public class Foot : MonoBehaviour
 
     void SelectFoot()
     {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         selected = true;
+        mouseOffset = new Vector2(footSelector.position.x, footSelector.position.y) - mousePos;
 
         // Add a rigidbody if there is none here
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
@@ -167,7 +180,7 @@ public class Foot : MonoBehaviour
 
         if (rb == null) { rb = gameObject.AddComponent<Rigidbody2D>(); }
         rb.isKinematic = false;
-        attachedToMouse = false;
+        //attachedToMouse = false;
 
         Debug.Log("Foot deselected");
     }
@@ -183,7 +196,7 @@ public class Foot : MonoBehaviour
             body.attachedLegs.Add(this);
             attachmentPoint = bodyPoint;
             attachmentPointRb = attachmentPoint.GetComponent<Rigidbody2D>();
-            attachmentPointJoint = GetComponent<SpringJoint2D>();
+            //attachmentPointJoint = GetComponent<SpringJoint2D>();
             //attachmentPointJoint = attachmentPoint.GetComponent<SpringJoint2D>();
 
             attachmentPointJoint.autoConfigureDistance = false;
@@ -225,7 +238,7 @@ public class Foot : MonoBehaviour
 
         attachmentPoint = null;
         if (attachmentPointJoint.connectedBody != null) { attachmentPointJoint.connectedBody = null; }
-        attachmentPointJoint = null;
+        //attachmentPointJoint = null;
 
         //fixedJoint.enabled = false;
         // Put arm back on default layer
@@ -260,6 +273,7 @@ public class Foot : MonoBehaviour
         if (dikkeJoint == null) { dikkeJoint = gameObject.AddComponent<SpringJoint2D>(); }
         dikkeJoint.enabled = false;
         dikkeJoint.breakForce = body.footBreak;
+        attachmentPointJoint = dikkeJoint;
     }
 
     IEnumerator DetachCooldown()

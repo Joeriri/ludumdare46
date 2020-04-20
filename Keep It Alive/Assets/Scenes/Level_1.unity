@@ -236,6 +236,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 785940164, guid: 87c7615fb6df744439e59e012d2c2316, type: 3}
+      propertyPath: m_DampingRatio
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 785940164, guid: 87c7615fb6df744439e59e012d2c2316, type: 3}
+      propertyPath: m_Frequency
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 101201507312566003, guid: 87c7615fb6df744439e59e012d2c2316,
         type: 3}
       propertyPath: m_Name
@@ -467,6 +475,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 785940164, guid: 87c7615fb6df744439e59e012d2c2316, type: 3}
+      propertyPath: m_DampingRatio
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 785940164, guid: 87c7615fb6df744439e59e012d2c2316, type: 3}
+      propertyPath: m_Frequency
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 101201507312566003, guid: 87c7615fb6df744439e59e012d2c2316,
         type: 3}
       propertyPath: m_Name
@@ -481,7 +497,7 @@ PrefabInstance:
         type: 3}
       propertyPath: hingeJointLeg
       value: 
-      objectReference: {fileID: 266413479}
+      objectReference: {fileID: 785940164}
     - target: {fileID: 101201507312566006, guid: 87c7615fb6df744439e59e012d2c2316,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -551,12 +567,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8704b57c21672bb4d8bb39bcb86ae572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!233 &266413479 stripped
-HingeJoint2D:
-  m_CorrespondingSourceObject: {fileID: 101201507312566001, guid: 87c7615fb6df744439e59e012d2c2316,
-    type: 3}
-  m_PrefabInstance: {fileID: 266413477}
-  m_PrefabAsset: {fileID: 0}
 --- !u!50 &266413480 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 101201507312566002, guid: 87c7615fb6df744439e59e012d2c2316,
@@ -984,6 +994,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa493586b7a0f834c9d4148edf44dbf6, type: 3}
+--- !u!231 &785940164 stripped
+SpringJoint2D:
+  m_CorrespondingSourceObject: {fileID: 785940164, guid: 87c7615fb6df744439e59e012d2c2316,
+    type: 3}
+  m_PrefabInstance: {fileID: 266413477}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &824019998
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,6 +1272,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MC
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099457616855930971, guid: af54cd6e87753da4b8a0930c85cc6b3a,
+        type: 3}
+      propertyPath: springNotActiveDivision
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099457616855930971, guid: af54cd6e87753da4b8a0930c85cc6b3a,
+        type: 3}
+      propertyPath: springNotActiveSubtraction
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099457616855930971, guid: af54cd6e87753da4b8a0930c85cc6b3a,
+        type: 3}
+      propertyPath: initialLegBreak
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099457616855930971, guid: af54cd6e87753da4b8a0930c85cc6b3a,
+        type: 3}
+      propertyPath: addedLegBreak
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af54cd6e87753da4b8a0930c85cc6b3a, type: 3}
