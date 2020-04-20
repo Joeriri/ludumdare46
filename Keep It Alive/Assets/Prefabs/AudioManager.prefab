@@ -43,4 +43,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ac0411524a6d84185dea20ea40bbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: Wind
+    clip: {fileID: 8300000, guid: f81e54df0bbe74443a41a8d8984ee764, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Rip_1
+    clip: {fileID: 8300000, guid: 3432bab84edbd194d96b1598977c06fa, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Rip_2
+    clip: {fileID: 8300000, guid: 6a59345ffd8b43142b8bf6aebf355ded, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BatHiss_1
+    clip: {fileID: 8300000, guid: 5a39a527445fb644c935773c12d250ea, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BatHiss_2
+    clip: {fileID: 8300000, guid: 8f2a1658ee9f6bc44967a5c5449e92f0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BatHiss_3
+    clip: {fileID: 8300000, guid: 44918a61030a8354ea318c20748d9802, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BatHiss_4
+    clip: {fileID: 8300000, guid: d33a901198829f24195990ed3103af0a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Music
+    clip: {fileID: 8300000, guid: 30e11b4b28a44254da9576f13294d763, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}

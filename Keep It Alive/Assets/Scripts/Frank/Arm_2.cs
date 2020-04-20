@@ -156,7 +156,7 @@ public class Arm_2 : MonoBehaviour
             }
 
             // if first limb to attach, cue the music
-            if (!GameManager.Instance.hasAttachedFirstLimb)
+            if (!GameManager.Instance.hasAttachedFirstLimb && selected)
             {
                 GameManager.Instance.AttachedFirstLimb();
             }

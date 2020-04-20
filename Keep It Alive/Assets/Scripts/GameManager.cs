@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float fadeInDuration = 1f;
     [SerializeField] private float fadeOutDuration = 1f;
     private FadeScreen fadeScreen;
+    [SerializeField] private float showTextDuration = 3f;
 
     [HideInInspector] public GameObject bodyPartClicked = null;
 
@@ -40,34 +41,36 @@ public class GameManager : MonoBehaviour
         //}
     }
 
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
+    //private void OnEnable()
+    //{
+    //    SceneManager.sceneLoaded += OnSceneLoaded;
+    //}
 
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
+    //private void OnDisable()
+    //{
+    //    SceneManager.sceneLoaded -= OnSceneLoaded;
+    //}
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        Debug.Log("OnSceneLoaded: " + scene.name);
-        Debug.Log(mode);
+    //void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    //{
+    //    Debug.Log("OnSceneLoaded: " + scene.name);
+    //    Debug.Log(mode);
 
-        levelIsDone = false;
-        fadeScreen = FindObjectOfType<FadeScreen>();
+    //    levelIsDone = false;
+    //    fadeScreen = FindObjectOfType<FadeScreen>();
 
-        if (SceneManager.GetActiveScene().buildIndex != 0)
-        {
-            StartCoroutine(FadeInLevelRoutine());
-        }
-    }
+    //    if (SceneManager.GetActiveScene().buildIndex != 0)
+    //    {
+    //        StartCoroutine(FadeInLevelRoutine());
+    //    }
+    //}
 
     void Start()
     {
-        AudioManager.instance.Play("Wind");
-        AudioManager.instance.ChangePitch("Wind", 1f);
+        levelIsDone = false;
+        fadeScreen = FindObjectOfType<FadeScreen>();
+
+        StartCoroutine(FadeInLevelRoutine());
     }
     
     void Update()
@@ -81,7 +84,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                StartCoroutine(RestartLevelRoutine());
+                StartCoroutine(RestartLevelRoutine(false, false));
                 Debug.Log("Returning to menu");
             }
         }
@@ -89,7 +92,7 @@ public class GameManager : MonoBehaviour
     
     public void FrankDie()
     {
-        StartCoroutine(RestartLevelRoutine());
+        StartCoroutine(RestartLevelRoutine(false, true));
         Debug.Log("FRANK IS DOOD ;_;");
     }
 
@@ -107,50 +110,83 @@ public class GameManager : MonoBehaviour
     {
         inMenu = false;
         Camera.main.GetComponent<Animator>().Play("IntroPan");
-        StartCoroutine(IntroSoundPitchFade(1.0f, windPitchLowered, introPanAnim.length));
+        StartCoroutine(FadeSoundPitch("Wind", 1.0f, windPitchLowered, introPanAnim.length));
     }
 
     public void EndIntroPan()
     {
         Debug.Log("game is go!");
         Camera.main.GetComponent<CameraMovement>().enabled = true;
-        BatBehaviour[] bats = FindObjectsOfType<BatBehaviour>();
-        foreach (BatBehaviour bat in bats)
-        {
-            bat.enabled = true;
-        }
     }
 
     public void AttachedFirstLimb()
     {
+        Debug.LogWarning("test 2");
         hasAttachedFirstLimb = true;
         AudioManager.instance.Play("Music");
     }
 
     public void EndGame()
     {
+        StartCoroutine(RestartLevelRoutine(true, false));
         Debug.Log("It is finished. It is done.");
     }
 
     private IEnumerator FadeInLevelRoutine()
     {
+        // screen
         fadeScreen.StartFade(Color.black, Color.clear, fadeInDuration);
+        // wind
+        AudioManager.instance.Play("Wind");
+        AudioManager.instance.ChangePitch("Wind", 1.0f);
+        StartCoroutine(FadeSoundVolume("Wind", 0.0f, 1.0f, fadeInDuration));
+
         yield return new WaitForSeconds(fadeInDuration);
     }
 
-    private IEnumerator RestartLevelRoutine()
+    private IEnumerator RestartLevelRoutine(bool win, bool die)
     {
+        // screen
         fadeScreen.StartFade(Color.clear, Color.black, fadeOutDuration);
+        // audio
+        StartCoroutine(FadeSoundVolume("Music", 0.1f, 0.0f, fadeOutDuration));
+        StartCoroutine(FadeSoundVolume("Wind", 1.0f, 0.0f, fadeOutDuration));
+
         yield return new WaitForSeconds(fadeOutDuration);
+
+        if (win)
+        {
+            fadeScreen.ShowEndText(showTextDuration);
+            yield return new WaitForSeconds(showTextDuration);
+        }
+        else if (die)
+        {
+            fadeScreen.ShowDieText(showTextDuration);
+            yield return new WaitForSeconds(showTextDuration);
+        }
+
+        // reload and stop sounds
+        AudioManager.instance.Stop("Music");
+        AudioManager.instance.Stop("Wind");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    private IEnumerator IntroSoundPitchFade(float oldPitch, float newPitch, float duration)
+    private IEnumerator FadeSoundPitch(string name, float oldPitch, float newPitch, float duration)
     {
         float step = 1f / duration;
         for (float i = 0f; i < 1f; i += step * Time.deltaTime)
         {
-            AudioManager.instance.ChangePitch("Wind", Mathf.Lerp(oldPitch, newPitch, i));
+            AudioManager.instance.ChangePitch(name, Mathf.Lerp(oldPitch, newPitch, i));
+            yield return null;
+        }
+    }
+
+    private IEnumerator FadeSoundVolume(string name, float oldVolume, float newVolume, float duration)
+    {
+        float step = 1f / duration;
+        for (float i = 0f; i < 1f; i += step * Time.deltaTime)
+        {
+            AudioManager.instance.ChangeVolume(name, Mathf.Lerp(oldVolume, newVolume, i));
             yield return null;
         }
     }

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class FadeScreen : MonoBehaviour
 {
     [SerializeField] private Image fadeScreen;
+    [SerializeField] private GameObject dieText;
+    [SerializeField] private GameObject endText;
 
     // Fade screen color
 
@@ -21,6 +23,34 @@ public class FadeScreen : MonoBehaviour
         {
             fadeScreen.color = Color.Lerp(oldColor, newColor, i);
             yield return null;
+        }
+    }
+
+    public void ShowDieText(float duration)
+    {
+        StartCoroutine(ShowText(dieText.gameObject, duration));
+    }
+
+    public void ShowEndText(float duration)
+    {
+        StartCoroutine(ShowText(endText.gameObject, duration));
+    }
+
+    IEnumerator ShowText(GameObject text, float duration)
+    {
+
+        Image[] children = text.GetComponentsInChildren<Image>();
+
+        foreach (Image child in children)
+        {
+            child.enabled = true;
+        }
+
+        yield return new WaitForSeconds(duration);
+
+        foreach (Image child in children)
+        {
+            child.enabled = false;
         }
     }
 }
