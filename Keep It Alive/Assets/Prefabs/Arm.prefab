@@ -295,13 +295,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   handSelector: {fileID: 7061485175786657886}
-  selectorRadius: 0.4
-  detachCooldownDuration: 1
+  selectorRadius: 0.3
+  detachCooldownDuration: 0.7
   attached: 0
   attachmentPoint: {fileID: 0}
   attachOnStart: 0
   startJoint: {fileID: 0}
   fixedJoint: {fileID: 0}
+  collidersInChildren:
+  - {fileID: 4919636393699814906}
 --- !u!50 &4570507710746543537
 Rigidbody2D:
   serializedVersion: 4

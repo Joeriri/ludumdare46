@@ -63,6 +63,30 @@ public class BodyJointBehaviour : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Limb" && !occupied)
+        {
+            Arm_2 arm = collision.gameObject.GetComponent<Arm_2>();
+
+            if (arm == null)
+            {
+                Leg leg = collision.gameObject.GetComponent<Leg>();
+                Foot foot = leg.foot;
+                //leg.AttachLeg(this);
+                foot.AttachLeg(this);
+                attachedFoot = foot;
+                occupied = true;
+            }
+            else
+            {
+                arm.AttachArm(this);
+                attachedArm = arm;
+                occupied = true;
+            }
+        }
+    }
+
     private void Update()
     {
         // can't reset these inside Arm, so we check here if arm says it has detached, and then we do it here as well.

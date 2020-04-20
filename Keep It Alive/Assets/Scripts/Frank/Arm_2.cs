@@ -30,6 +30,8 @@ public class Arm_2 : MonoBehaviour
 
     private GameManager gm;
 
+    [SerializeField] Collider2D[] collidersInChildren;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -94,6 +96,27 @@ public class Arm_2 : MonoBehaviour
                     }
                 }
             }
+        }
+
+        if (selected)
+        {
+            for (int i = 0; i < collidersInChildren.Length; i++)
+            {
+                collidersInChildren[i].enabled = false;
+            }
+
+            target.gameObject.GetComponent<Collider2D>().enabled = false;
+            GetComponent<CircleCollider2D>().isTrigger = true;
+        }
+        else
+        {
+            for (int i = 0; i < collidersInChildren.Length; i++)
+            {
+                collidersInChildren[i].enabled = true;
+            }
+
+            target.gameObject.GetComponent<Collider2D>().enabled = true;
+            GetComponent<CircleCollider2D>().isTrigger = false;
         }
     }
 
