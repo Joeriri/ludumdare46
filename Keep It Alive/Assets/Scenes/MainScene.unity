@@ -1235,7 +1235,7 @@ PrefabInstance:
     - target: {fileID: 1739480147753313997, guid: 7e02ab5a93ff1c54c84b6d3291f461ea,
         type: 3}
       propertyPath: attachCooldownTimer
-      value: 0.1
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 1739480147753314002, guid: 7e02ab5a93ff1c54c84b6d3291f461ea,
         type: 3}
@@ -3439,6 +3439,11 @@ PrefabInstance:
         type: 3}
       propertyPath: limbBreakForce
       value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739480147753313997, guid: 7e02ab5a93ff1c54c84b6d3291f461ea,
+        type: 3}
+      propertyPath: attachCooldownTimer
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 1739480147753314002, guid: 7e02ab5a93ff1c54c84b6d3291f461ea,
         type: 3}

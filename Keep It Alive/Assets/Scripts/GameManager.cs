@@ -23,18 +23,20 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            if (Instance != this)
-            {
-                Destroy(gameObject);
-            }
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(this);
-        }
+        Instance = this;
+
+        //if (Instance != null)
+        //{
+        //    if (Instance != this)
+        //    {
+        //        Destroy(gameObject);
+        //    }
+        //}
+        //else
+        //{
+        //    Instance = this;
+        //    DontDestroyOnLoad(this);
+        //}
     }
 
     private void OnEnable()
@@ -64,16 +66,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         AudioManager.instance.Play("Wind");
+        AudioManager.instance.ChangePitch("Wind", 1f);
     }
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && !inMenu)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            Debug.Log("Restarting level");
-        }
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (inMenu)
