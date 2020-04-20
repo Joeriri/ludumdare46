@@ -99,10 +99,7 @@ public class Foot : MonoBehaviour
                 {
                     DetachFoot();
                 }
-            }
-
-            Debug.LogWarning(leg.hingeJointLeg.reactionForce);
-            
+            }            
 
             // Deselect the arm
             if (Input.GetKeyUp(KeyCode.Mouse0))
@@ -125,7 +122,6 @@ public class Foot : MonoBehaviour
         {
             AddSpringJoint2D();
         }
-
 
         //if(attachmentPoint != null)
         //{
@@ -158,6 +154,9 @@ public class Foot : MonoBehaviour
         // make foot non-physics
         rb.isKinematic = true;
 
+        // stop camera movement
+        GameManager.Instance.stopCamera();
+
         Debug.Log("Foot selected");
     }
 
@@ -181,6 +180,9 @@ public class Foot : MonoBehaviour
         if (rb == null) { rb = gameObject.AddComponent<Rigidbody2D>(); }
         rb.isKinematic = false;
         //attachedToMouse = false;
+
+        // stop camera movement
+        GameManager.Instance.ResumeCamera();
 
         Debug.Log("Foot deselected");
     }

@@ -172,6 +172,9 @@ public class Arm_2 : MonoBehaviour
         // disable arm joint to target
         springJoint.enabled = false;
 
+        // stop camera movement
+        GameManager.Instance.stopCamera();
+
         Debug.Log("Arm selected");
     }
 
@@ -186,6 +189,9 @@ public class Arm_2 : MonoBehaviour
         // enable arm joint to target to make target dependable on arm
         springJoint.enabled = true;
         springJoint.connectedBody = targetRb;
+
+        // resume camera movement
+        GameManager.Instance.ResumeCamera();
 
         Debug.Log("Arm deselected");
     }

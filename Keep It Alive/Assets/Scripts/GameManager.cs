@@ -96,12 +96,12 @@ public class GameManager : MonoBehaviour
 
     public void stopCamera()
     {
-        Camera.main.GetComponent<CameraMovement>().enabled = false;
+        Camera.main.GetComponent<CameraMovement>().lockAllAxes = true;
     }
 
     public void ResumeCamera()
     {
-        Camera.main.GetComponent<CameraMovement>().enabled = true;
+        Camera.main.GetComponent<CameraMovement>().lockAllAxes = false;
     }
 
     public void StartIntroPan()
@@ -115,6 +115,11 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("game is go!");
         Camera.main.GetComponent<CameraMovement>().enabled = true;
+        BatBehaviour[] bats = FindObjectsOfType<BatBehaviour>();
+        foreach (BatBehaviour bat in bats)
+        {
+            bat.enabled = true;
+        }
     }
 
     public void GoToNextLevel()

@@ -64,12 +64,19 @@ public class BatBehaviour: MonoBehaviour
             batwings[i].animCancel = true;
         }
 
+        // play die sound when dying
+        AudioManager.instance.Play("BatHiss_" + Random.Range(1, 5).ToString());
+
         Destroy(this);
     }
 
     public IEnumerator GoAway(float timer)
     {
         goAway = true;
+
+        // play hiss when attacked
+        AudioManager.instance.Play("BatHiss_" + Random.Range(1, 5).ToString());
+
         yield return new WaitForSeconds(timer);
         goAway = false;
         //Debug.Log("GoAwaaaaaaaaaay");
