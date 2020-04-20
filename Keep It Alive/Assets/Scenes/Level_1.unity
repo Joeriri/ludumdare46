@@ -236,23 +236,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 785940164, guid: 87c7615fb6df744439e59e012d2c2316, type: 3}
-      propertyPath: m_DampingRatio
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 785940164, guid: 87c7615fb6df744439e59e012d2c2316, type: 3}
-      propertyPath: m_Frequency
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 101201507312566003, guid: 87c7615fb6df744439e59e012d2c2316,
         type: 3}
       propertyPath: m_Name
       value: Leg (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 101201507312566003, guid: 87c7615fb6df744439e59e012d2c2316,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 101201507312566005, guid: 87c7615fb6df744439e59e012d2c2316,
         type: 3}
@@ -1272,26 +1259,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MC
-      objectReference: {fileID: 0}
-    - target: {fileID: 8099457616855930971, guid: af54cd6e87753da4b8a0930c85cc6b3a,
-        type: 3}
-      propertyPath: springNotActiveDivision
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8099457616855930971, guid: af54cd6e87753da4b8a0930c85cc6b3a,
-        type: 3}
-      propertyPath: springNotActiveSubtraction
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8099457616855930971, guid: af54cd6e87753da4b8a0930c85cc6b3a,
-        type: 3}
-      propertyPath: initialLegBreak
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 8099457616855930971, guid: af54cd6e87753da4b8a0930c85cc6b3a,
-        type: 3}
-      propertyPath: addedLegBreak
-      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af54cd6e87753da4b8a0930c85cc6b3a, type: 3}
