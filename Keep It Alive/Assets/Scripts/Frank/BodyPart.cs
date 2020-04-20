@@ -39,12 +39,15 @@ public class BodyPart : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        BatBehaviour tempBat = collision.collider.GetComponentInParent<BatBehaviour>();
-        if (tempBat != null)
+        if(collision.gameObject.tag == "Enemy")
         {
-            Debug.Log("A bat killed a part of Frank");
-            DestroyBodyPart();
-            tempBat.WingSnapped();
+            BatBehaviour tempBat = collision.collider.GetComponentInParent<BatBehaviour>();
+            if (tempBat != null)
+            {
+                Debug.Log("A bat killed a part of Frank");
+                DestroyBodyPart();
+                tempBat.WingSnapped();
+            }
         }
     }
 }

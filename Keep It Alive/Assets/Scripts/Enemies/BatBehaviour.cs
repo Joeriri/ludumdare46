@@ -60,6 +60,7 @@ public class BatBehaviour: MonoBehaviour
 
         for (int i = 0; i < batwings.Length; i++)
         {
+            batwings[i].GetComponentInChildren<PolygonCollider2D>().isTrigger = false;
             batwings[i].GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             batwings[i].animCancel = true;
         }

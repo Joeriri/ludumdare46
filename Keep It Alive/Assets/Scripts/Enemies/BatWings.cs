@@ -47,6 +47,7 @@ public class BatWings : MonoBehaviour
         animCancel = true;
         transform.parent = null;
         //gameObject.AddComponent<Rigidbody2D>();
+        GetComponentInChildren<PolygonCollider2D>().isTrigger = false;
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         GetComponent<Rigidbody2D>().AddForce(Random.Range(200f, 500f) * Random.insideUnitCircle);
         parentBatBehaviour.WingSnapped();

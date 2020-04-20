@@ -85,13 +85,16 @@ public class Arm_2 : MonoBehaviour
             }
 
             //Collider stuff
-            for (int i = 0; i < collidersInChildren.Length; i++)
+            if (!attached)
             {
-                collidersInChildren[i].enabled = false;
-            }
+                for (int i = 0; i < collidersInChildren.Length; i++)
+                {
+                    collidersInChildren[i].enabled = false;
+                }
 
-            target.gameObject.GetComponent<Collider2D>().enabled = false;
-            GetComponent<CircleCollider2D>().isTrigger = true;
+                target.gameObject.GetComponent<Collider2D>().enabled = false;
+                GetComponent<CircleCollider2D>().isTrigger = true;
+            }
         }
         else
         {
