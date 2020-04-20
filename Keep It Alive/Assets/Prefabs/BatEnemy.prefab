@@ -1239,7 +1239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a658cc5a698a5a46aca6ec0d7d1c9a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  batSpeed: 3
+  batSpeed: 2.3
   noiseOn: 1
   noiseResetRange: {x: 0.1, y: 0.6}
   noiseTimeRange: {x: 0.3, y: 1}
