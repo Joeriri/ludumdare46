@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1944243423823452144}
   - component: {fileID: 3224139538418962578}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FootSelectorSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1739480147025729795}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FootSelector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ MonoBehaviour:
   selectorRadius: 0.5
   leg: {fileID: 0}
   detachCooldownDuration: 1
-  springFreq: 4
+  springFreq: 5
   springDistance: 1.7
   attachmentPoint: {fileID: 0}
   attachOnStart: 0
@@ -322,7 +322,7 @@ GameObject:
   m_Component:
   - component: {fileID: 66324416025284874}
   - component: {fileID: 3131328006262009631}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: UnderLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}

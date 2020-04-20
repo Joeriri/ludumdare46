@@ -81,6 +81,15 @@ public class Arm_2 : MonoBehaviour
                 gm.bodyPartClicked = null;
                 DeselectArm();
             }
+
+            //Collider stuff
+            for (int i = 0; i < collidersInChildren.Length; i++)
+            {
+                collidersInChildren[i].enabled = false;
+            }
+
+            target.gameObject.GetComponent<Collider2D>().enabled = false;
+            GetComponent<CircleCollider2D>().isTrigger = true;
         }
         else
         {
@@ -96,20 +105,8 @@ public class Arm_2 : MonoBehaviour
                     }
                 }
             }
-        }
 
-        if (selected)
-        {
-            for (int i = 0; i < collidersInChildren.Length; i++)
-            {
-                collidersInChildren[i].enabled = false;
-            }
-
-            target.gameObject.GetComponent<Collider2D>().enabled = false;
-            GetComponent<CircleCollider2D>().isTrigger = true;
-        }
-        else
-        {
+            //Collider stuff
             for (int i = 0; i < collidersInChildren.Length; i++)
             {
                 collidersInChildren[i].enabled = true;
@@ -118,6 +115,7 @@ public class Arm_2 : MonoBehaviour
             target.gameObject.GetComponent<Collider2D>().enabled = true;
             GetComponent<CircleCollider2D>().isTrigger = false;
         }
+
     }
 
     private void LateUpdate()

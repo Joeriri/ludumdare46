@@ -108,6 +108,13 @@ public class Foot : MonoBehaviour
                 DeselectFoot();
                 mouseCheck = false;
             }
+
+            //make leg collider trigger
+            leg.GetComponent<Collider2D>().isTrigger = true;
+        }
+        else
+        {
+            leg.GetComponent<Collider2D>().isTrigger = false;
         }
 
         if(attachmentPointJoint != null)
@@ -247,7 +254,7 @@ public class Foot : MonoBehaviour
         Transform[] _children = GetComponentsInChildren<Transform>();
         foreach (Transform child in _children)
         {
-            child.gameObject.layer = 0;
+            child.gameObject.layer = 9;
         }
         // start attach cooldown to prevent instant re attachment.
         StartCoroutine(DetachCooldown());
