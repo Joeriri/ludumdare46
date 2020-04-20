@@ -8,10 +8,14 @@ public class GameManager : MonoBehaviour
     private bool inMenu = true;
     private bool levelIsDone = false;
 
+    [Header("Intro Pan")]
+    [SerializeField] private AnimationClip introPanAnim;
+    [SerializeField] private float windPitchLowered = 0.7f;
+
     [Header("Fade")]
-    private FadeScreen fadeScreen;
     [SerializeField] private float fadeInDuration = 1f;
     [SerializeField] private float fadeOutDuration = 1f;
+    private FadeScreen fadeScreen;
 
     [HideInInspector] public GameObject bodyPartClicked = null;
 
@@ -59,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        AudioManager.instance.Play("Wind");
     }
     
     void Update()
@@ -104,11 +108,13 @@ public class GameManager : MonoBehaviour
     {
         inMenu = false;
         Camera.main.GetComponent<Animator>().Play("IntroPan");
+        StartCoroutine(IntroSoundPitchFade(1.0f, windPitchLowered, introPanAnim.length));
     }
 
     public void EndIntroPan()
     {
         Debug.Log("game is go!");
+        Camera.main.GetComponent<CameraMovement>().enabled = true;
     }
 
     public void GoToNextLevel()
@@ -131,5 +137,15 @@ public class GameManager : MonoBehaviour
         fadeScreen.StartFade(Color.clear, Color.black, fadeOutDuration);
         yield return new WaitForSeconds(fadeOutDuration);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    private IEnumerator IntroSoundPitchFade(float oldPitch, float newPitch, float duration)
+    {
+        float step = 1f / duration;
+        for (float i = 0f; i < 1f; i += step * Time.deltaTime)
+        {
+            AudioManager.instance.ChangePitch("Wind", Mathf.Lerp(oldPitch, newPitch, i));
+            yield return null;
+        }
     }
 }

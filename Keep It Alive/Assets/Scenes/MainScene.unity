@@ -1804,7 +1804,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 84102b7cb0b7eed4d9c5fc17e75aeb92, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1843,7 +1843,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166911810}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b1b154db254daf44b99779fb8c52bea, type: 3}
   m_Name: 
@@ -1851,6 +1851,7 @@ MonoBehaviour:
   target: {fileID: 0}
   smoothSpeed: 1
   offset: {x: 0, y: 0, z: -10}
+  lockY: 1
 --- !u!1001 &1188811990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2089,6 +2090,11 @@ PrefabInstance:
       propertyPath: fadeOutDuration
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 956712718921907764, guid: 097f33a61d8d329489e55a825d378fb1,
+        type: 3}
+      propertyPath: introPanAnim
+      value: 
+      objectReference: {fileID: 7400000, guid: 50c1d93b8e7409743b07714c565fe854, type: 2}
     - target: {fileID: 956712718921907765, guid: 097f33a61d8d329489e55a825d378fb1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3527,6 +3533,31 @@ PrefabInstance:
     - target: {fileID: 4136462940808524156, guid: 53dff85844f62a546b6576f4d6c317b6,
         type: 3}
       propertyPath: sounds.Array.data[2].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136462940808524156, guid: 53dff85844f62a546b6576f4d6c317b6,
+        type: 3}
+      propertyPath: sounds.Array.data[0].name
+      value: Wind
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136462940808524156, guid: 53dff85844f62a546b6576f4d6c317b6,
+        type: 3}
+      propertyPath: sounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 346a9c8e9f9dfdb4fb9721368ae2001e, type: 3}
+    - target: {fileID: 4136462940808524156, guid: 53dff85844f62a546b6576f4d6c317b6,
+        type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136462940808524156, guid: 53dff85844f62a546b6576f4d6c317b6,
+        type: 3}
+      propertyPath: sounds.Array.data[0].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136462940808524156, guid: 53dff85844f62a546b6576f4d6c317b6,
+        type: 3}
+      propertyPath: sounds.Array.data[0].loop
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4136462940808524157, guid: 53dff85844f62a546b6576f4d6c317b6,

@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        Play("Theme");
+
     }
 
     public void Play(string name)
@@ -50,6 +50,7 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+    // change pitch
     public void ChangePitch(string name, float value)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -59,5 +60,17 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.pitch = value;
+    }
+
+    // change volume
+    public void ChangeVolume(string name, float value)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("name " + name + " wasn't found and couldn't be changed in volume!");
+            return;
+        }
+        s.source.volume = value;
     }
 }
