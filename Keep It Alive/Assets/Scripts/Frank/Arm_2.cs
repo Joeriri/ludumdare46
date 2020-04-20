@@ -24,7 +24,7 @@ public class Arm_2 : MonoBehaviour
     [SerializeField] private BodyJointBehaviour startJoint;
 
     private MainBody body;
-    private FixedJoint2D fixedJoint;
+    public FixedJoint2D fixedJoint;
     private Rigidbody2D rb;
     private SpringJoint2D springJoint;
 

@@ -27,10 +27,20 @@ public class MainBody : MonoBehaviour
     [SerializeField] float springNotActiveDivision = 1;
 
     [HideInInspector] public float armBreak = 1;
-    public float legBreak = 1;
-    public float legBreakWhileSpringNotActive = 1;
+    [HideInInspector] public float legBreak = 1;
+    [HideInInspector] public float legBreakWhileSpringNotActive = 1;
     [HideInInspector] public float footBreak = 1;
 
+    //[Header("Debug")]
+    //[SerializeField] float[] armStrain = new float[2];
+    //[SerializeField] float[] legStrain = new float[2];
+
+
+    //private void Start()
+    //{
+    //    armStrain = new float[2];
+    //    legStrain = new float[2];
+    //}
     // Update is called once per frame
     void Update()
     {
@@ -38,5 +48,15 @@ public class MainBody : MonoBehaviour
         legBreak = initialLegBreak + (addedLegBreak * attachedArms.Count * armMultiplier) + (addedLegBreak * attachedLegs.Count * legMultiplier);
         legBreakWhileSpringNotActive = (initialLegBreak + (addedLegBreak * attachedArms.Count * armMultiplier) + (addedLegBreak * attachedLegs.Count * legMultiplier))/springNotActiveDivision - springNotActiveSubtraction;
         footBreak = Mathf.Infinity;
+
+        //for (int i = 0; i < attachedArms.Count; i++)
+        //{
+        //    armStrain[i] = attachedArms[i].fixedJoint.reactionForce.magnitude;
+        //}
+
+        //for (int i = 0; i < attachedLegs.Count; i++)
+        //{
+        //    legStrain[i] = attachedLegs[i].leg.hingeJointLeg.reactionForce.magnitude;
+        //}
     }
 }

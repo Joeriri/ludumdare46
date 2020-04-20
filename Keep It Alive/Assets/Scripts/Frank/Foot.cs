@@ -6,7 +6,7 @@ public class Foot : MonoBehaviour
 {
     [SerializeField] private Transform footSelector;
     [SerializeField] private float selectorRadius = 1f;
-    [SerializeField] private Leg leg;
+    public Leg leg;
 
     [SerializeField] private float detachCooldownDuration = 1f;
     //[SerializeField] private float limbBreakForce = Mathf.Infinity;
