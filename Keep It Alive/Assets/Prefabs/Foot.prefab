@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 1739480147753314001}
   - component: {fileID: 1739480147753314006}
   - component: {fileID: 1739480147753313996}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,6 +218,7 @@ MonoBehaviour:
   detachCooldownDuration: 1
   springFreq: 5
   springDistance: 1.7
+  attachCooldownTimer: 0.1
   attachmentPoint: {fileID: 0}
   attachOnStart: 0
   startJoint: {fileID: 0}

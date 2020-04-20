@@ -4,36 +4,36 @@ using UnityEngine;
 
 public class Foot : MonoBehaviour
 {
+    [Header("Needed")]
+    public Leg leg;
     [SerializeField] private Transform footSelector;
     [SerializeField] private float selectorRadius = 1f;
-    public Leg leg;
 
-    [SerializeField] private float detachCooldownDuration = 1f;
-    //[SerializeField] private float limbBreakForce = Mathf.Infinity;
-    //[SerializeField] private float springBreakForce = Mathf.Infinity;
-
+    [Header("Spring")]
     [SerializeField] private float springFreq = 1;
     [SerializeField] private float springDistance = 1;
 
-    //private bool attachedToMouse = false;
-    private bool attachable = true;
-    private bool attached = false;
-    private bool selected;
-    private Rigidbody2D attachmentPointRb;
-    private SpringJoint2D attachmentPointJoint;
-
-    public BodyJointBehaviour attachmentPoint = null;
-    private MainBody body;
-
-    private HingeJoint2D hingeJointFoot;
+    [Header("Cooldowns")]
+    [SerializeField] private float attachCooldownTimer = 0;
+    [SerializeField] private float detachCooldownDuration = 1f;
 
     [Header("Attach on start")]
     [SerializeField] private bool attachOnStart = false;
     [SerializeField] private BodyJointBehaviour startJoint;
 
-    private GameManager gm;
-    private bool mouseCheck;
+    [HideInInspector] public BodyJointBehaviour attachmentPoint = null;
+
+
+    private bool attachable = true;
+    private bool attached = false;
+    private bool attachCooldown = false;
+    private bool selected;
     private Vector2 mouseOffset;
+    private Rigidbody2D attachmentPointRb;
+    private SpringJoint2D attachmentPointJoint;
+    private MainBody body;
+    private HingeJoint2D hingeJointFoot;
+    private GameManager gm;
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +53,7 @@ public class Foot : MonoBehaviour
                 AttachLeg(startJoint);
                 startJoint.attachedFoot = this;
                 startJoint.occupied = true;
+                DeselectFoot();
             }
             else
             {
@@ -87,7 +88,7 @@ public class Foot : MonoBehaviour
             if (attachmentPointJoint.enabled && attachmentPointJoint.connectedBody == body.GetComponent<Rigidbody2D>())
             {
                 //Debug.LogWarning("Yes");
-                if (leg.hingeJointLeg.reactionForce.magnitude > body.legBreak)
+                if (leg.hingeJointLeg.reactionForce.magnitude > body.legBreak && attachCooldown == false)
                 {
                     DetachFoot();
                 }
@@ -95,7 +96,7 @@ public class Foot : MonoBehaviour
             else
             {
                 //Debug.LogWarning("No");
-                if (leg.hingeJointLeg.reactionForce.magnitude > body.legBreakWhileSpringNotActive)
+                if (leg.hingeJointLeg.reactionForce.magnitude > body.legBreakWhileSpringNotActive && attachCooldown == false)
                 {
                     DetachFoot();
                 }
@@ -106,7 +107,6 @@ public class Foot : MonoBehaviour
             {
                 gm.bodyPartClicked = null;
                 DeselectFoot();
-                mouseCheck = false;
             }
 
             //make leg collider trigger
@@ -214,6 +214,8 @@ public class Foot : MonoBehaviour
             attachmentPointJoint.distance = springDistance;
             attachmentPointJoint.frequency = springFreq;
 
+            attachCooldown = true;
+            StartCoroutine(AttachCooldown());
             //attachmentPointJoint.autoConfigureDistance = false;
             //attachmentPointJoint.distance = springDistance;
             //attachmentPointJoint.frequency = springFreq*6;
@@ -290,6 +292,12 @@ public class Foot : MonoBehaviour
         yield return new WaitForSeconds(detachCooldownDuration);
         attachable = true;
         //Debug.Log("Yes");
+    }
+
+    IEnumerator AttachCooldown()
+    {
+        yield return new WaitForSeconds(attachCooldownTimer);
+        attachCooldown = false;
     }
 
     private void OnDrawGizmos()

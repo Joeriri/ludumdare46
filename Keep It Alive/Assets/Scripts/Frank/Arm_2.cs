@@ -18,6 +18,7 @@ public class Arm_2 : MonoBehaviour
     [HideInInspector] public bool attached = false;
     //[SerializeField] float limbBreakForce = Mathf.Infinity;
     [HideInInspector] public BodyJointBehaviour attachmentPoint;
+    [SerializeField] private float attachCooldownTimer;
 
     [Header("Attach on start")]
     [SerializeField] private bool attachOnStart = false;
@@ -29,6 +30,7 @@ public class Arm_2 : MonoBehaviour
     private SpringJoint2D springJoint;
 
     private GameManager gm;
+    private bool attachCooldown;
 
     [SerializeField] Collider2D[] collidersInChildren;
 
@@ -221,6 +223,12 @@ public class Arm_2 : MonoBehaviour
     {
         yield return new WaitForSeconds(detachCooldownDuration);
         attachable = true;
+    }
+
+    IEnumerator AttachCooldown()
+    {
+        yield return new WaitForSeconds(attachCooldownTimer);
+        attachCooldown = false;
     }
 
     private void OnDrawGizmos()
