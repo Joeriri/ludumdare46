@@ -299,7 +299,7 @@ MonoBehaviour:
   detachCooldownDuration: 0.7
   attached: 0
   attachmentPoint: {fileID: 0}
-  attachCooldownTimer: 0.1
+  attachCooldownTimer: 0.05
   attachOnStart: 0
   startJoint: {fileID: 0}
   fixedJoint: {fileID: 0}

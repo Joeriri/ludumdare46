@@ -212,16 +212,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff856d6701bcca94ea2beba7e5f1a25b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leg: {fileID: 0}
   footSelector: {fileID: 1739480147025729795}
   selectorRadius: 0.5
-  leg: {fileID: 0}
-  detachCooldownDuration: 1
   springFreq: 5
   springDistance: 1.7
-  attachCooldownTimer: 0.1
-  attachmentPoint: {fileID: 0}
+  attachCooldownTimer: 0.05
+  detachCooldownDuration: 1
   attachOnStart: 0
   startJoint: {fileID: 0}
+  attachmentPoint: {fileID: 0}
 --- !u!50 &1739480147753314000
 Rigidbody2D:
   serializedVersion: 4

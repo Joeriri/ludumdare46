@@ -71,7 +71,7 @@ public class Arm_2 : MonoBehaviour
             target.transform.position = mousePos;
 
             // arm break
-            if (fixedJoint.reactionForce.magnitude > body.armBreak)
+            if (fixedJoint.reactionForce.magnitude > body.armBreak && attachCooldown == false)
             {
                 DetachArm();
                 Debug.Log("Arm broke off!");
@@ -141,6 +141,9 @@ public class Arm_2 : MonoBehaviour
             transform.position = attachmentPoint.transform.position;
             fixedJoint.enabled = true;
             fixedJoint.connectedBody = body.GetComponent<Rigidbody2D>();
+
+            attachCooldown = true;
+            StartCoroutine(AttachCooldown());
 
             // Move layers to avoid nasty collisions
             Transform[] _children = GetComponentsInChildren<Transform>();
