@@ -92,3 +92,27 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: Attach_1
+    clip: {fileID: 8300000, guid: f9ce31ccd12874c4c9293ba355c13f27, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Attach_2
+    clip: {fileID: 8300000, guid: bd866d774adfd22408ec93745cab804b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Attach_3
+    clip: {fileID: 8300000, guid: 840a7cd18e580a14fbd553474841ec2f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Thunder
+    clip: {fileID: 8300000, guid: 7a6ecdc4d29437f4d9f35fa6c2c09f57, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

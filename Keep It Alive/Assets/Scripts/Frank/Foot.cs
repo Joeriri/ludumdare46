@@ -231,6 +231,14 @@ public class Foot : MonoBehaviour
                 child.gameObject.layer = 8;
             }
 
+            // play sound
+            if (selected)
+            {
+                string randomAttachSound = "Attach_" + Random.Range(1, 4).ToString();
+                AudioManager.instance.Play(randomAttachSound);
+                AudioManager.instance.ChangePitch(randomAttachSound, Random.Range(0.7f, 1.3f));
+            }
+
             // if first limb to attach, cue the music
             if (!GameManager.Instance.hasAttachedFirstLimb && selected)
             {
