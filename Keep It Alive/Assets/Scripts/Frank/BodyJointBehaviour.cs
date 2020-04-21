@@ -27,7 +27,7 @@ public class BodyJointBehaviour : MonoBehaviour
                 attachedFoot = foot;
                 occupied = true;
             }
-            else if(leg == null)
+            else if(leg == null && arm == null)
             {
                 Debug.LogWarning("Ayy");
                 head.AttachHead(this);
@@ -59,7 +59,7 @@ public class BodyJointBehaviour : MonoBehaviour
                 attachedFoot = foot;
                 occupied = true;
             }
-            else if (leg == null)
+            else if (leg == null && arm == null)
             {
                 Debug.LogWarning("Ayy");
                 head.AttachHead(this);
