@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
+    private Coroutine RestartLevel = null;
+
     private void Awake()
     {
         Instance = this;
@@ -130,7 +132,7 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-        StartCoroutine(RestartLevelRoutine(true, false));
+        if(RestartLevel == null) { RestartLevel = StartCoroutine(RestartLevelRoutine(true, false)); }        
         Debug.Log("It is finished. It is done.");
     }
 
@@ -173,6 +175,7 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.Stop("Music");
         AudioManager.instance.Stop("Wind");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        RestartLevel = null;
     }
 
     private IEnumerator FadeSoundPitch(string name, float oldPitch, float newPitch, float duration)
