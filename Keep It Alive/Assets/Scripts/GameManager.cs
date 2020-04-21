@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
     public void FrankDie()
     {
         StartCoroutine(RestartLevelRoutine(false, true));
+        AudioManager.instance.Play("Thunder");
         Debug.Log("FRANK IS DOOD ;_;");
     }
 
@@ -109,6 +110,7 @@ public class GameManager : MonoBehaviour
     public void StartIntroPan()
     {
         inMenu = false;
+        AudioManager.instance.Play("Thunder");
         Camera.main.GetComponent<Animator>().Play("IntroPan");
         StartCoroutine(FadeSoundPitch("Wind", 1.0f, windPitchLowered, introPanAnim.length));
     }
@@ -153,6 +155,8 @@ public class GameManager : MonoBehaviour
         StartCoroutine(FadeSoundVolume("Wind", 1.0f, 0.0f, fadeOutDuration));
 
         yield return new WaitForSeconds(fadeOutDuration);
+
+        yield return new WaitForSeconds(2.0f);
 
         if (win)
         {
