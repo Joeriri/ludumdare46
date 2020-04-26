@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -4901,6 +4901,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: MC
       objectReference: {fileID: 0}
+    - target: {fileID: 8099457616855930971, guid: af54cd6e87753da4b8a0930c85cc6b3a,
+        type: 3}
+      propertyPath: initialLegBreak
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099457616855930971, guid: af54cd6e87753da4b8a0930c85cc6b3a,
+        type: 3}
+      propertyPath: addedLegBreak
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099457616855930971, guid: af54cd6e87753da4b8a0930c85cc6b3a,
+        type: 3}
+      propertyPath: initialArmBreak
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099457616855930971, guid: af54cd6e87753da4b8a0930c85cc6b3a,
+        type: 3}
+      propertyPath: addedArmBreak
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af54cd6e87753da4b8a0930c85cc6b3a, type: 3}
 --- !u!114 &1083906512 stripped
@@ -6413,13 +6433,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1399823475}
-  m_LocalRotation: {x: -0, y: -0, z: -0.150811, w: -0.98856264}
+  m_LocalRotation: {x: -0, y: -0, z: -0.079852745, w: -0.9968067}
   m_LocalPosition: {x: 26.14, y: -15.57, z: 0}
   m_LocalScale: {x: 0.48003083, y: 0.47111833, z: 1.4009}
   m_Children: []
   m_Father: {fileID: 170490514}
   m_RootOrder: 30
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 17.348001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 9.160001}
 --- !u!61 &1399823477
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9497,13 +9517,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890984500}
-  m_LocalRotation: {x: -0, y: -0, z: 0.12743904, w: 0.99184644}
+  m_LocalRotation: {x: -0, y: -0, z: 0.0626993, w: 0.99803245}
   m_LocalPosition: {x: 28.81, y: -14.26, z: 0}
   m_LocalScale: {x: 0.48003083, y: 0.47111833, z: 1.4009}
   m_Children: []
   m_Father: {fileID: 170490514}
   m_RootOrder: 22
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 14.643001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 7.1900005}
 --- !u!61 &1890984502
 BoxCollider2D:
   m_ObjectHideFlags: 0

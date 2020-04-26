@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private bool inMenu = true;
-    private bool levelIsDone = false;
     public bool hasAttachedFirstLimb = false;
+    private bool restartingLevel = false;
 
     [Header("Intro Pan")]
     [SerializeField] private AnimationClip introPanAnim;
@@ -57,8 +57,7 @@ public class GameManager : MonoBehaviour
     //{
     //    Debug.Log("OnSceneLoaded: " + scene.name);
     //    Debug.Log(mode);
-
-    //    levelIsDone = false;
+    
     //    fadeScreen = FindObjectOfType<FadeScreen>();
 
     //    if (SceneManager.GetActiveScene().buildIndex != 0)
@@ -69,7 +68,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        levelIsDone = false;
+        restartingLevel = false;
         fadeScreen = FindObjectOfType<FadeScreen>();
 
         StartCoroutine(FadeInLevelRoutine());
@@ -86,17 +85,23 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                StartCoroutine(RestartLevelRoutine(false, false));
-                Debug.Log("Returning to menu");
+                if (!restartingLevel)
+                {
+                    StartCoroutine(RestartLevelRoutine(false, false));
+                    Debug.Log("Returning to menu");
+                }
             }
         }
     }
     
     public void FrankDie()
     {
-        StartCoroutine(RestartLevelRoutine(false, true));
-        AudioManager.instance.Play("Thunder");
-        Debug.Log("FRANK IS DOOD ;_;");
+        if (!restartingLevel)
+        {
+            StartCoroutine(RestartLevelRoutine(false, true));
+            AudioManager.instance.Play("Thunder");
+            Debug.Log("FRANK IS DOOD ;_;");
+        }
     }
 
     public void stopCamera()
@@ -132,8 +137,11 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-        if(RestartLevel == null) { RestartLevel = StartCoroutine(RestartLevelRoutine(true, false)); }        
-        Debug.Log("It is finished. It is done.");
+        if (!restartingLevel)
+        {
+            StartCoroutine(RestartLevelRoutine(true, false));
+            Debug.Log("It is finished. It is done.");
+        }
     }
 
     private IEnumerator FadeInLevelRoutine()
@@ -150,6 +158,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RestartLevelRoutine(bool win, bool die)
     {
+        restartingLevel = true;
         // screen
         fadeScreen.StartFade(Color.clear, Color.black, fadeOutDuration);
         // audio
